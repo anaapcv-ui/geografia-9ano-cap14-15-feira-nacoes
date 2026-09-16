@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo — Geografia 9º ano (CCF) · Feira das Nações</title>
+<style>
+  :root{--bg:#fff7ec;--panel:#ffffff;--panel2:#fff3df;--line:#f0dcc0;--ink:#33261a;--muted:#8a7a66;
+    --blue:#2b7fff;--red:#ff5d5d;--green:#12b886;--green2:#0e916c;--yellow:#ffcf33;--purple:#8b5cf6;--purple2:#6d3ff0;--orange:#ff8f3f;}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(900px 520px at 8% -8%,#efe0ff88,transparent),radial-gradient(820px 480px at 96% 0%,#ffe6c299,transparent),var(--bg);
+    color:var(--ink);font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:18px;line-height:1.6}
+  .wrap{max-width:900px;margin:0 auto;padding:14px 16px 90px}
+  header{position:relative;overflow:hidden;border-radius:18px;background:linear-gradient(120deg,#6d3ff0,#8b5cf6 50%,#ff8f3f);
+    color:#fff;padding:24px 22px 28px;margin-bottom:16px;box-shadow:0 12px 30px #8b5cf633}
+  header h1{margin:.1em 0;font-size:1.55rem} header p{margin:.2em 0;color:#fdf4ff}
+  .chip{display:inline-block;background:#ffffff2e;border:1px solid #ffffff7a;color:#fff;font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+  .bunting{position:absolute;left:0;right:0;bottom:0;height:20px;pointer-events:none;opacity:.9}
+  .salvar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:16px;box-shadow:0 4px 14px #eab97533}
+  .salvar .info{color:var(--muted);font-size:.85rem;flex:1 1 200px}
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:10px;padding:9px 14px;font-size:.92rem;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--purple),#a884ff)}
+  button.ghost{background:#fff3df;color:var(--ink);border:1px solid var(--line)}
+  .prog{position:sticky;top:0;z-index:30;margin:0 -16px 16px;background:#fff7ecdd;backdrop-filter:blur(6px);padding:10px 16px;border-bottom:1px solid var(--line)}
+  .barra{height:12px;background:#efe2f7;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .barra > i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--purple),var(--orange));transition:width .3s}
+  .prog small{color:var(--muted)}
+  .sec{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 6px 18px #eab97522}
+  .sec h2{margin-top:0;color:var(--purple2);display:flex;align-items:center;gap:8px}
+  .sec h3{color:#26364a;margin:.8em 0 .3em}
+  .pav{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--orange)}
+  .card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+  .card b{color:var(--green2)}
+  .destaque{color:var(--purple2);font-weight:700}
+  ul.lista{margin:.4em 0;padding-left:20px} ul.lista li{margin:6px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}
+  .flip{background:transparent;perspective:1000px;min-height:120px;cursor:pointer}
+  .flip-in{position:relative;width:100%;height:100%;min-height:120px;transition:transform .5s;transform-style:preserve-3d}
+  .flip.on .flip-in{transform:rotateY(180deg)}
+  .flip-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line)}
+  .flip-front{background:linear-gradient(135deg,#efe4ff,#fff);color:var(--purple2);font-weight:700}
+  .flip-back{background:linear-gradient(135deg,#e5faf1,#fff);color:#0e5f47;transform:rotateY(180deg);font-size:.92rem}
+  .flip .dica-vire{position:absolute;bottom:6px;right:10px;font-size:.68rem;color:var(--muted)}
+  .postit{background:#fff6c2;color:#5a4600;border-radius:8px;padding:14px 16px;margin:12px 0;font-weight:600;box-shadow:2px 3px 8px #d8b84066;transform:rotate(-.6deg)}
+  .postit b{color:#7a5c00}
+  .peg{background:#fff0ee;border:1px solid #ffb3ad;border-radius:10px;padding:12px 15px;margin:12px 0;color:#c0392b}
+  .peg b{color:#a92f22}
+  table.gloss{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:8px}
+  table.gloss td,table.gloss th{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  table.gloss th{background:#efe4ff;color:var(--purple2)}
+  table.gloss td.termo{font-weight:700;color:var(--green2);white-space:nowrap}
+  .modal-bg{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;background:#33261a80;padding:20px}
+  .modal-bg.on{display:flex}
+  .modal-card{max-width:430px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .modal-acoes{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="modal-bg" id="modalBg"><div class="modal-card"><div id="modalTxt"></div><div class="modal-acoes" id="modalAcoes"></div></div></div>
+
+<div class="wrap">
+  <header><span class="chip">🗺️ Feira das Nações · Resumo</span>
+    <h1>Resumo — Geografia 9º ano · Colégio Coração Feliz</h1>
+    <p><b>Prova de 24/09</b> — Blocos econômicos, União Europeia, Ásia/Oceania, desigualdade e transnacionais (caps. 14 e 15)</p>
+    <p style="font-size:.92rem;color:#fdf4ff">Passe pelos estandes, vire as cartas e leia as dicas em post-it. Este é o mapa da Feira para fechar o que faltou. 🎪</p>
+    <svg class="bunting" viewBox="0 0 900 20" preserveAspectRatio="none"><g>
+      <polygon points="0,0 45,0 22,18" fill="#ffcf33"/><polygon points="45,0 90,0 67,18" fill="#ff5d5d"/><polygon points="90,0 135,0 112,18" fill="#12b886"/><polygon points="135,0 180,0 157,18" fill="#ffffff"/>
+      <polygon points="180,0 225,0 202,18" fill="#ff8f3f"/><polygon points="225,0 270,0 247,18" fill="#2b7fff"/><polygon points="270,0 315,0 292,18" fill="#ffcf33"/><polygon points="315,0 360,0 337,18" fill="#ff5d5d"/>
+      <polygon points="360,0 405,0 382,18" fill="#12b886"/><polygon points="405,0 450,0 427,18" fill="#ffffff"/><polygon points="450,0 495,0 472,18" fill="#ff8f3f"/><polygon points="495,0 540,0 517,18" fill="#2b7fff"/>
+      <polygon points="540,0 585,0 562,18" fill="#ffcf33"/><polygon points="585,0 630,0 607,18" fill="#ff5d5d"/><polygon points="630,0 675,0 652,18" fill="#12b886"/><polygon points="675,0 720,0 697,18" fill="#ffffff"/>
+      <polygon points="720,0 765,0 742,18" fill="#ff8f3f"/><polygon points="765,0 810,0 787,18" fill="#2b7fff"/><polygon points="810,0 855,0 832,18" fill="#ffcf33"/><polygon points="855,0 900,0 877,18" fill="#ff5d5d"/>
+    </g></svg>
+  </header>
+
+  <div class="prog"><div class="barra"><i id="fill"></i></div><small id="progtxt">0% lido</small></div>
+
+  <div class="salvar"><div class="info" id="saveinfo">Seu progresso é salvo sozinho.</div>
+    <button class="ghost" onclick="exportar()">📥 Exportar</button>
+    <button class="ghost" onclick="document.getElementById('imp').click()">📤 Importar</button>
+    <input id="imp" type="file" accept="application/json" style="display:none" onchange="importar(event)">
+    <button class="ghost" onclick="zerar()">🗑️ Zerar tudo</button></div>
+
+  <!-- 1 -->
+  <div class="sec">
+    <div class="pav">🎪 Pavilhão da Integração</div>
+    <h2>🤝 Blocos econômicos</h2>
+    <div class="card"><b>Bloco econômico</b> = grupo de países que se unem para <b>integrar economias</b> e facilitar o comércio. Surgiram na <b>Europa</b> após a 2ª Guerra e cresceram no fim dos anos <b>1980</b>, com a globalização.</div>
+    <div class="card"><b>Soberania</b> = direito de todo país decidir sozinho. Ao entrar num bloco, o país abre mão de <b>parte</b> dela (não de tudo).</div>
+    <div class="card"><b>Barreiras comerciais</b> = normas alfandegárias que protegem o mercado nacional: tarifas de importação, cotas, licenças e medidas fitossanitárias.</div>
+    <h3>Os 5 graus de integração (do mais simples ao mais completo)</h3>
+    <ul class="lista">
+      <li><b>1. Zona de livre-comércio</b> — tira as tarifas <b>entre os membros</b>.</li>
+      <li><b>2. União aduaneira</b> — regras de importação <b>iguais para os de fora</b>.</li>
+      <li><b>3. Mercado comum</b> — soma a <b>livre circulação de pessoas, serviços e capitais</b>.</li>
+      <li><b>4. União monetária</b> — <b>moeda única</b> + banco central único.</li>
+      <li><b>5. União política</b> — <b>leis comuns</b> (cidadania, imigração, segurança).</li>
+    </ul>
+    <div class="postit">📌 <b>Dica de prova:</b> a <b>livre circulação de pessoas</b> só aparece a partir do <b>mercado comum</b>. A <b>moeda única</b>, só na <b>união monetária</b>.</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="sec">
+    <div class="pav">🎪 Pavilhão da Europa</div>
+    <h2>🇪🇺 A União Europeia</h2>
+    <ul class="lista">
+      <li><b>Plano Marshall</b> — EUA ajudam a reconstruir a Europa Ocidental após a 2ª Guerra.</li>
+      <li><b>Alsácia-Lorena</b> — região rica em <b>carvão e ferro</b>, disputada por França e Alemanha.</li>
+      <li><b>1950 — CECA</b> (Robert Schuman): comércio de <b>carvão e aço</b> sem tarifas.</li>
+      <li><b>1957 — Tratados de Roma</b>: criam a <b>EURATOM</b> (energia atômica) e a <b>CEE</b> → Mercado Comum Europeu ("Europa dos 12").</li>
+      <li><b>1992 — Tratado de Maastricht</b> (Holanda): cria a <b>União Europeia</b>, moeda única, Parlamento em <b>Bruxelas</b> (sufrágio universal = voto direto).</li>
+      <li><b>2002 — Euro</b> em circulação. <b>BCE</b> (Banco Central Europeu) fica em <b>Frankfurt</b>, na Alemanha.</li>
+    </ul>
+    <div class="grid">
+      <div class="flip" onclick="virar(this)"><div class="flip-in">
+        <div class="flip-face flip-front">Onde fica o BCE?<span class="dica-vire">clique para virar</span></div>
+        <div class="flip-face flip-back">Em <b>Frankfurt</b> (Alemanha). Em Bruxelas fica o <b>Parlamento</b>.</div></div></div>
+      <div class="flip" onclick="virar(this)"><div class="flip-in">
+        <div class="flip-face flip-front">O que é o Brexit?<span class="dica-vire">clique para virar</span></div>
+        <div class="flip-face flip-back">Saída do <b>Reino Unido</b> da UE. Referendo em <b>2016</b> (52% x 48%); saída em <b>2020</b>.</div></div></div>
+      <div class="flip" onclick="virar(this)"><div class="flip-in">
+        <div class="flip-face flip-front">As 12 estrelas da bandeira da UE significam?<span class="dica-vire">clique para virar</span></div>
+        <div class="flip-face flip-back"><b>União e plenitude</b> (não é o número de países).</div></div></div>
+    </div>
+    <div class="card"><b>Expansão para o Leste:</b> no séc. XXI entraram <b>13 países</b> (11 do Leste + 2 ilhas). Exigência: dívida/déficit ≤ <b>60% do PIB</b>. Mercado da UE ≈ <b>500 milhões</b> de pessoas.</div>
+    <div class="peg">⚠️ <b>Pegadinha:</b> nem todo país da UE usa o <b>euro</b> (ex.: Dinamarca; o Reino Unido, quando era membro, também não).</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="sec">
+    <div class="pav">🎪 Pavilhão do Pacífico</div>
+    <h2>🌏 Ásia, Oceania e o acordo Mercosul-UE</h2>
+    <ul class="lista">
+      <li><b>Mercosul-UE</b> — acordo anunciado em <b>dez/2024</b>, após 25 anos. Reduz tarifas; a <b>França se opõe</b> (produtores agrícolas).</li>
+      <li><b>China</b> — <b>maior país-fábrica</b> do planeta; entrou na <b>OMC</b> em <b>2001</b>.</li>
+      <li><b>China-África</b> — visto como "novo neocolonialismo": compra <b>matérias-primas</b> (commodities), vende <b>industrializados</b>; maior investidora na África desde 2009.</li>
+      <li><b>Oceania</b> — Austrália e Nova Zelândia: minerais e pecuária.</li>
+    </ul>
+    <h3>Blocos da região</h3>
+    <ul class="lista">
+      <li><b>APEC</b> (Cooperação Econômica Ásia-Pacífico) — <b>1993</b>; zona de livre-comércio; membros <b>heterogêneos</b>; decisões giram em torno de <b>EUA e China</b>.</li>
+      <li><b>ASEAN</b> (Sudeste Asiático) — <b>1967</b>; zona de livre-comércio desde 1992.</li>
+      <li>Menores: <b>SAARC</b>, <b>ECO</b>, <b>CEI</b> (ex-repúblicas soviéticas).</li>
+    </ul>
+    <div class="postit">📌 <b>Dica:</b> ligue as datas — <b>ASEAN 1967</b>, <b>APEC 1993</b>, <b>China na OMC 2001</b>, <b>Mercosul-UE 2024</b>.</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="sec">
+    <div class="pav">🎪 Pavilhão da Desigualdade</div>
+    <h2>⚖️ Desigualdade e Divisão do Trabalho</h2>
+    <div class="card"><b>Países centrais</b> = lugares do <b>"mandar"</b> (ricos, com tecnologia). <b>Países periféricos</b> = lugares do <b>"obedecer"</b> (fornecem matérias-primas).</div>
+    <div class="card"><b>Ciclo da inovação:</b> inovação → pesquisa → riqueza. Protegido por <b>patentes</b> (monopólio do lucro por um tempo).</div>
+    <div class="card"><b>Nova DIT</b> (Divisão Internacional do Trabalho): centrais fazem <b>alta tecnologia</b>; periferia fornece <b>matérias-primas</b> e industrializados de <b>baixa tecnologia</b>.</div>
+    <div class="grid">
+      <div class="flip" onclick="virar(this)"><div class="flip-in">
+        <div class="flip-face flip-front">O que mede o Índice de Gini?<span class="dica-vire">clique para virar</span></div>
+        <div class="flip-face flip-back">A <b>concentração de renda</b>. Vai de <b>0 a 1</b> (ou 0 a 100). Perto de <b>0</b> = menos desigual; perto de <b>1</b> = mais desigual.</div></div></div>
+      <div class="flip" onclick="virar(this)"><div class="flip-in">
+        <div class="flip-face flip-front">Conflito Norte-Sul x Leste-Oeste?<span class="dica-vire">clique para virar</span></div>
+        <div class="flip-face flip-back"><b>Norte-Sul</b> = econômico (atual). <b>Leste-Oeste</b> (EUA x URSS) = político-militar (Guerra Fria).</div></div></div>
+      <div class="flip" onclick="virar(this)"><div class="flip-in">
+        <div class="flip-face flip-front">Quem forma o BRICS?<span class="dica-vire">clique para virar</span></div>
+        <div class="flip-face flip-back">Brasil, Rússia, Índia, China, África do Sul, Egito, Emirados Árabes, Arábia Saudita, Etiópia e Irã.</div></div></div>
+    </div>
+    <div class="peg">⚠️ <b>Pegadinha:</b> Norte-Sul <b>não</b> é o mapa. Austrália e Nova Zelândia ficam no Sul, mas são do <b>"Norte"</b> (ricos).</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="sec">
+    <div class="pav">🎪 Pavilhão da Tecnologia</div>
+    <h2>💻 Tecnologia, P&D e transnacionais</h2>
+    <ul class="lista">
+      <li><b>C&T</b> = Conhecimento e Tecnologia. <b>P&D</b> = Pesquisa e Desenvolvimento (feito pelo Estado ou por empresas). EUA e China investem mais.</li>
+      <li>Empresas que mais investem em P&D (2024): <b>Alphabet, Meta, Apple, Microsoft</b> (EUA), <b>Volkswagen, Mercedes-Benz</b> (Alemanha), <b>Huawei</b> (China), <b>Samsung</b> (Coreia do Sul), farmacêuticas (Roche, Pfizer, J&J).</li>
+      <li><b>Royalties</b> = pagamento pelo uso de invenções/criações com patente (filmes, músicas, seriados, livros, jogos). Concentram-se no <b>Norte</b> = poder do Norte sobre o Sul.</li>
+      <li><b>Transnacional</b> substituiu <b>multinacional</b> (atua além das fronteiras). As de automóveis = <b>montadoras</b>. Milton Santos: o <b>Estado continua forte</b>.</li>
+      <li><b>Internet desigual</b> — depende de infraestrutura: fibra óptica, torres, data centers = <b>fixos geográficos</b>; os <b>fluxos</b> não são iguais em todo lugar. Mais da metade do conteúdo em <b>inglês</b> (só ~5% o falam como língua materna). Cibersegurança: Brasil é o <b>2º</b> mais maduro das Américas (UIT, 2024).</li>
+    </ul>
+    <div class="postit">📌 <b>Dica:</b> "multinacional" virou <b>transnacional</b>; automóveis = <b>montadoras</b>; <b>royalties</b> e <b>internet</b> concentrados no Norte rico.</div>
+  </div>
+
+  <!-- Glossário -->
+  <div class="sec">
+    <h2>📖 Glossário rápido</h2>
+    <table class="gloss">
+      <tr><th>Termo</th><th>O que é</th></tr>
+      <tr><td class="termo">Soberania</td><td>Direito de todo país tomar sozinho as próprias decisões.</td></tr>
+      <tr><td class="termo">Barreira comercial</td><td>Norma alfandegária (tarifa, cota, licença) que protege o mercado nacional.</td></tr>
+      <tr><td class="termo">Sufrágio universal</td><td>Votação direta dos cidadãos.</td></tr>
+      <tr><td class="termo">Brexit</td><td>Saída do Reino Unido da União Europeia (2020).</td></tr>
+      <tr><td class="termo">Commodities</td><td>Matérias-primas vendidas no comércio mundial.</td></tr>
+      <tr><td class="termo">Índice de Gini</td><td>Mede a concentração de renda (0 a 1). Perto de 1 = mais desigual.</td></tr>
+      <tr><td class="termo">Patente</td><td>Direito de monopólio do lucro sobre uma invenção por um tempo.</td></tr>
+      <tr><td class="termo">Royalties</td><td>Pagamento pelo uso de invenções/criações patenteadas.</td></tr>
+      <tr><td class="termo">Transnacional</td><td>Empresa que atua além das fronteiras dos países.</td></tr>
+      <tr><td class="termo">Fixos geográficos</td><td>Infraestrutura fixa: fibra óptica, torres, data centers.</td></tr>
+    </table>
+    <p style="color:var(--muted);font-size:.9rem;margin-top:14px">🎯 Terminou o Resumo? Vá para o <b>Simulado</b> e enfrente a prova de verdade!</p>
+  </div>
+</div>
+
+<script>
+const KEY='geo9_ccf_c1415_resumo_v1';
+let estado={scrollMax:0, ts:null};
+let mem={};
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return mem[k]||null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete mem[k];}}
+function carregar(){try{const s=lsGet(KEY);if(s)estado=JSON.parse(s);}catch(e){}}
+function salvar(){estado.ts=new Date().toISOString();lsSet(KEY,JSON.stringify(estado));pintarInfo();}
+function pintarInfo(){const el=document.getElementById('saveinfo');
+  if(estado.ts){const d=new Date(estado.ts);el.innerHTML='💾 Salvo: <b>'+d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'</b>';}
+  else el.textContent='Seu progresso é salvo sozinho.';}
+
+function modalConfirm(html,onSim,txtSim,txtNao){document.getElementById('modalTxt').innerHTML=html;const ac=document.getElementById('modalAcoes');ac.innerHTML='';
+  const b1=document.createElement('button');b1.className='ghost';b1.textContent=txtNao||'Cancelar';b1.onclick=()=>document.getElementById('modalBg').classList.remove('on');
+  const b2=document.createElement('button');b2.textContent=txtSim||'Confirmar';b2.onclick=()=>{document.getElementById('modalBg').classList.remove('on');onSim&&onSim();};
+  ac.appendChild(b1);ac.appendChild(b2);document.getElementById('modalBg').classList.add('on');}
+function modalInfo(html){document.getElementById('modalTxt').innerHTML=html;const ac=document.getElementById('modalAcoes');ac.innerHTML='';
+  const b=document.createElement('button');b.textContent='Ok';b.onclick=()=>document.getElementById('modalBg').classList.remove('on');ac.appendChild(b);document.getElementById('modalBg').classList.add('on');}
+
+function virar(el){el.classList.toggle('on');}
+
+function onScroll(){
+  const h=document.documentElement;
+  const max=h.scrollHeight-h.clientHeight;
+  const pct=max<=0?100:Math.round(h.scrollTop/max*100);
+  if(pct>(estado.scrollMax||0)){estado.scrollMax=pct;salvar();}
+  document.getElementById('fill').style.width=(estado.scrollMax||0)+'%';
+  document.getElementById('progtxt').textContent=(estado.scrollMax||0)+'% lido';
+}
+
+function exportar(){const out={resumo:estado};const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='progresso-resumo-geografia9.json';a.click();}
+function importar(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const o=JSON.parse(r.result);if(o.resumo)estado=o.resumo;else estado=o;salvar();onScroll();modalInfo('<p>✅ Importado!</p>');}catch(e){modalInfo('<p>Arquivo inválido.</p>');}};
+  r.readAsText(f);}
+function zerar(){modalConfirm('<p><b>Zerar tudo?</b></p><p>Apaga o progresso de leitura, para outra criança usar.</p>',
+  ()=>{estado={scrollMax:0,ts:null};lsDel(KEY);onScroll();modalInfo('<p>🗑️ Zerado!</p>');},'Sim, zerar','Cancelar');}
+
+carregar();pintarInfo();
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+</script>
+</body>
+</html>
