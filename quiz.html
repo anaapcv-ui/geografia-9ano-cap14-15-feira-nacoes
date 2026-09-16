@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — Geografia 9º ano (CCF) · Feira das Nações</title>
+<style>
+  :root{--bg:#fff7ec;--panel:#ffffff;--panel2:#fff3df;--line:#f0dcc0;--ink:#33261a;--muted:#8a7a66;
+    --blue:#2b7fff;--blue2:#155fd6;--red:#ff5d5d;--green:#12b886;--green2:#0e916c;--yellow:#ffcf33;--grey:#b9a98f;}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(900px 520px at 8% -8%,#d6ecff88,transparent),radial-gradient(820px 480px at 96% 0%,#ffe6c299,transparent),var(--bg);
+    color:var(--ink);font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:18px;line-height:1.6}
+  .wrap{max-width:860px;margin:0 auto;padding:14px 16px 90px}
+  header{position:relative;overflow:hidden;border-radius:18px;background:linear-gradient(120deg,#155fd6,#2b7fff 55%,#12b886);
+    color:#fff;padding:24px 22px 28px;margin-bottom:16px;box-shadow:0 12px 30px #2b7fff33}
+  header h1{margin:.1em 0;font-size:1.55rem} header p{margin:.2em 0;color:#eef6ff}
+  .chip{display:inline-block;background:#ffffff2e;border:1px solid #ffffff7a;color:#fff;font-size:.76rem;font-weight:700;
+    padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+  .bunting{position:absolute;left:0;right:0;bottom:0;height:20px;pointer-events:none;opacity:.9}
+  .salvar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:16px;box-shadow:0 4px 14px #eab97533}
+  .salvar .info{color:var(--muted);font-size:.85rem;flex:1 1 200px}
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:10px;padding:9px 14px;font-size:.92rem;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--blue),#5aa0ff)}
+  button.ghost{background:#fff3df;color:var(--ink);border:1px solid var(--line)}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;margin-bottom:14px;box-shadow:0 6px 18px #eab97522}
+  .q .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;font-weight:800;margin-right:8px;background:linear-gradient(135deg,var(--green2),var(--blue));color:#fff}
+  .enun{font-weight:700;color:#26364a;margin-bottom:10px}
+  .alt{display:block;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:7px 0;cursor:pointer;transition:.15s}
+  .alt:hover{border-color:var(--blue)}
+  .alt.sel{border-color:var(--blue);background:#eaf2ff}
+  .alt .letra{font-weight:800;color:var(--blue2);margin-right:8px}
+  .alt.correta{border-color:var(--green);background:#e5faf1}
+  .alt.errada-sel{border-color:var(--red);background:#fff0ee}
+  .alt.cinza{opacity:.7}
+  .exp{display:none;font-size:.88rem;color:var(--muted);margin-top:6px;padding-left:6px;border-left:3px solid var(--line)}
+  .exp.on{display:block}.exp.ok{border-color:var(--green);color:#0e7a5c}.exp.no{border-color:var(--grey)}
+  .barra-fixa{position:sticky;bottom:0;background:#fff7ecf2;border-top:1px solid var(--line);margin:0 -16px;padding:12px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;z-index:30}
+  .barra-fixa .cont{color:var(--muted);font-size:.9rem;flex:1}
+  .codigo-box{background:var(--panel);border:1px solid var(--blue);border-radius:16px;padding:20px;margin-bottom:16px;display:none;box-shadow:0 6px 18px #2b7fff22}
+  .codigo-box.on{display:block}
+  .codigo-grande{font-size:1.8rem;font-weight:800;letter-spacing:2px;color:var(--blue2);margin:8px 0}
+  .codigo-box input{font-family:inherit;font-size:1rem;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);width:150px;text-transform:uppercase}
+  .modal-bg{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;background:#33261a80;padding:20px}
+  .modal-bg.on{display:flex}
+  .modal-card{max-width:430px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .modal-acoes{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="modal-bg" id="modalBg"><div class="modal-card"><div id="modalTxt"></div><div class="modal-acoes" id="modalAcoes"></div></div></div>
+
+<div class="wrap">
+  <header><span class="chip">🎯 Feira das Nações · Quiz</span>
+    <h1>Quiz — Geografia 9º ano · Colégio Coração Feliz</h1>
+    <p><b>Prova de 24/09</b> — 15 perguntas de múltipla escolha (caps. 14 e 15)</p>
+    <p style="font-size:.92rem;color:#eef6ff">Escolha uma alternativa em cada pergunta, jovem aprendiz. No fim você recebe um <b>código</b> para a sua mãe liberar o gabarito comentado. 🌍</p>
+    <svg class="bunting" viewBox="0 0 900 20" preserveAspectRatio="none"><g>
+      <polygon points="0,0 45,0 22,18" fill="#ffcf33"/><polygon points="45,0 90,0 67,18" fill="#ff5d5d"/><polygon points="90,0 135,0 112,18" fill="#12b886"/><polygon points="135,0 180,0 157,18" fill="#ffffff"/>
+      <polygon points="180,0 225,0 202,18" fill="#ff8f3f"/><polygon points="225,0 270,0 247,18" fill="#8b5cf6"/><polygon points="270,0 315,0 292,18" fill="#ffcf33"/><polygon points="315,0 360,0 337,18" fill="#ff5d5d"/>
+      <polygon points="360,0 405,0 382,18" fill="#12b886"/><polygon points="405,0 450,0 427,18" fill="#ffffff"/><polygon points="450,0 495,0 472,18" fill="#ff8f3f"/><polygon points="495,0 540,0 517,18" fill="#8b5cf6"/>
+      <polygon points="540,0 585,0 562,18" fill="#ffcf33"/><polygon points="585,0 630,0 607,18" fill="#ff5d5d"/><polygon points="630,0 675,0 652,18" fill="#12b886"/><polygon points="675,0 720,0 697,18" fill="#ffffff"/>
+      <polygon points="720,0 765,0 742,18" fill="#ff8f3f"/><polygon points="765,0 810,0 787,18" fill="#8b5cf6"/><polygon points="810,0 855,0 832,18" fill="#ffcf33"/><polygon points="855,0 900,0 877,18" fill="#ff5d5d"/>
+    </g></svg>
+  </header>
+  <div class="salvar"><div class="info" id="saveinfo">Suas respostas são salvas sozinhas.</div>
+    <button class="ghost" onclick="exportar()">📥 Exportar</button>
+    <button class="ghost" onclick="document.getElementById('imp').click()">📤 Importar</button>
+    <input id="imp" type="file" accept="application/json" style="display:none" onchange="importar(event)">
+    <button class="ghost" onclick="zerar()">🗑️ Zerar tudo</button></div>
+
+  <div class="codigo-box" id="codigoBox"></div>
+  <div id="perguntas"></div>
+
+  <div class="barra-fixa">
+    <span class="cont" id="contResp">0 de 15 respondidas</span>
+    <button id="btnFinalizar" onclick="finalizar()" disabled>🏁 Finalizar e gerar código</button>
+  </div>
+</div>
+
+<script>
+/* ================= QUESTÕES (base: Callis Geografia 9 — Livro 2, caps. 14 e 15) ================= */
+const QUESTOES=[
+ {p:"Nos blocos econômicos, os países abrem mão de parte da <b>soberania</b>. O que é soberania?",
+  alts:[{t:"O direito de todo país tomar sozinho as próprias decisões.",ok:true,exp:"Soberania é o poder do país de decidir por si mesmo."},
+   {t:"A moeda usada por um bloco econômico.",ok:false,exp:"Isso é a moeda única, não soberania."},
+   {t:"O total de produtos que um país exporta.",ok:false,exp:"Soberania não é volume de exportação."},
+   {t:"A união de vários países num só governo mundial.",ok:false,exp:"Não existe governo mundial; soberania é o poder de decidir do país."}]},
+ {p:"As <b>barreiras comerciais</b> (tarifas, cotas, licenças) servem principalmente para:",
+  alts:[{t:"proteger o mercado nacional da concorrência de fora.",ok:true,exp:"São normas alfandegárias que protegem a economia do país."},
+   {t:"acabar com a soberania dos países.",ok:false,exp:"Elas defendem o país, não acabam com a soberania."},
+   {t:"obrigar todos os países a usar a mesma moeda.",ok:false,exp:"Não têm relação com moeda única."},
+   {t:"aumentar a livre circulação de pessoas.",ok:false,exp:"Barreiras dificultam, não aumentam a circulação."}]},
+ {p:"A <b>livre circulação de pessoas, serviços e capitais</b> começa a existir a partir de qual grau de integração?",
+  alts:[{t:"Mercado comum.",ok:true,exp:"O mercado comum acrescenta a livre circulação ao livre-comércio."},
+   {t:"Zona de livre-comércio.",ok:false,exp:"A zona de livre-comércio só tira as tarifas entre os membros."},
+   {t:"União aduaneira.",ok:false,exp:"A união aduaneira só iguala as regras de importação para os de fora."},
+   {t:"União política.",ok:false,exp:"A união política é um grau ainda mais avançado; a livre circulação já começa antes."}]},
+ {p:"Em 1950, quem propôs a <b>CECA</b> (Comunidade Europeia do Carvão e do Aço)?",
+  alts:[{t:"Robert Schuman.",ok:true,exp:"Schuman propôs a CECA, primeiro passo da integração europeia."},
+   {t:"Milton Santos.",ok:false,exp:"Milton Santos foi um geógrafo brasileiro; não criou a CECA."},
+   {t:"Conrado Gini.",ok:false,exp:"Gini criou o índice de concentração de renda."},
+   {t:"Carl Woese.",ok:false,exp:"Woese é da Biologia (domínios), não da CECA."}]},
+ {p:"O <b>Tratado de Maastricht</b> (1992) é importante porque:",
+  alts:[{t:"criou a União Europeia e definiu a moeda única.",ok:true,exp:"Maastricht deu origem à UE, à moeda única e às regras comuns."},
+   {t:"criou a CECA, o comércio do carvão e do aço.",ok:false,exp:"A CECA é de 1950, bem antes."},
+   {t:"tirou o Reino Unido da União Europeia.",ok:false,exp:"Isso é o Brexit, muito depois (2020)."},
+   {t:"acabou com o euro na Europa.",ok:false,exp:"Ao contrário: preparou a moeda única."}]},
+ {p:"Onde fica a sede do <b>Banco Central Europeu (BCE)</b>, responsável pela moeda da Zona do Euro?",
+  alts:[{t:"Em Frankfurt, na Alemanha.",ok:true,exp:"O BCE fica em Frankfurt desde 1999."},
+   {t:"Em Bruxelas, na Bélgica.",ok:false,exp:"Em Bruxelas fica o Parlamento europeu, não o BCE."},
+   {t:"Em Roma, na Itália.",ok:false,exp:"Em Roma foram assinados os Tratados de 1957, mas o BCE não fica lá."},
+   {t:"Em Londres, no Reino Unido.",ok:false,exp:"O Reino Unido nem adotou o euro."}]},
+ {p:"O <b>Brexit</b> foi:",
+  alts:[{t:"a saída do Reino Unido da União Europeia, concretizada em 2020.",ok:true,exp:"'British' + 'exit' = saída do Reino Unido da UE."},
+   {t:"a entrada de 13 novos países na União Europeia.",ok:false,exp:"Essa foi a expansão para o Leste, não o Brexit."},
+   {t:"a criação da moeda única europeia.",ok:false,exp:"Isso foi a adoção do euro."},
+   {t:"um acordo entre o Mercosul e a União Europeia.",ok:false,exp:"Esse é outro acordo, anunciado em 2024."}]},
+ {p:"A <b>China</b>, chamada de 'maior país-fábrica do planeta', entrou na <b>OMC</b> (Organização Mundial do Comércio) em:",
+  alts:[{t:"2001.",ok:true,exp:"A China entrou na OMC em 2001."},
+   {t:"1950.",ok:false,exp:"1950 é o ano da CECA, na Europa."},
+   {t:"1992.",ok:false,exp:"1992 é o Tratado de Maastricht."},
+   {t:"2020.",ok:false,exp:"2020 é o ano do Brexit."}]},
+ {p:"Na divisão entre países <b>centrais e periféricos</b>, os centrais são descritos como os lugares:",
+  alts:[{t:"do 'mandar' — ricos e poderosos, que dominam a tecnologia.",ok:true,exp:"Os centrais concentram riqueza e tecnologia."},
+   {t:"do 'obedecer' — que só fornecem matérias-primas.",ok:false,exp:"Isso descreve os periféricos."},
+   {t:"que não participam do comércio mundial.",ok:false,exp:"Os centrais são os que mais participam."},
+   {t:"que têm o maior Índice de Gini do mundo.",ok:false,exp:"Gini alto é sinal de desigualdade, não de ser central."}]},
+ {p:"O <b>Índice de Gini</b> serve para medir:",
+  alts:[{t:"a concentração de renda (a desigualdade) de um país.",ok:true,exp:"Compara os 20% mais pobres com os 20% mais ricos."},
+   {t:"a quantidade de habitantes de um país.",ok:false,exp:"Isso é a população, não o Gini."},
+   {t:"o tamanho do território de um país.",ok:false,exp:"O Gini não mede território."},
+   {t:"o número de blocos econômicos do mundo.",ok:false,exp:"Não tem relação com blocos."}]},
+ {p:"Um país com Índice de Gini <b>perto de 1</b> (ou 100) é um país:",
+  alts:[{t:"muito desigual.",ok:true,exp:"Quanto mais perto de 1, maior a desigualdade."},
+   {t:"muito igualitário.",ok:false,exp:"Igualitário seria perto de 0."},
+   {t:"sem nenhuma desigualdade.",ok:false,exp:"Sem desigualdade seria Gini 0."},
+   {t:"com a maior população do mundo.",ok:false,exp:"O Gini não mede população."}]},
+ {p:"Uma <b>patente</b> garante a uma empresa:",
+  alts:[{t:"o monopólio do lucro sobre uma invenção por um período.",ok:true,exp:"A patente protege a criação e o lucro por um tempo."},
+   {t:"a livre circulação de pessoas entre países.",ok:false,exp:"Isso é característica do mercado comum."},
+   {t:"a isenção de todos os impostos para sempre.",ok:false,exp:"Patente não isenta impostos."},
+   {t:"a entrada automática num bloco econômico.",ok:false,exp:"Patente não tem relação com entrar em bloco."}]},
+ {p:"O termo <b>'multinacional'</b> foi substituído por qual outro, e como são chamadas as empresas de automóveis?",
+  alts:[{t:"Por 'transnacional'; as de automóveis são as 'montadoras'.",ok:true,exp:"Transnacional = atua além das fronteiras; automóveis = montadoras."},
+   {t:"Por 'periférica'; as de automóveis são as 'aduaneiras'.",ok:false,exp:"Esses termos não têm esse significado."},
+   {t:"Por 'estatal'; as de automóveis são as 'monetárias'.",ok:false,exp:"Termos trocados e sem sentido aqui."},
+   {t:"Por 'supranacional'; as de automóveis são as 'fitossanitárias'.",ok:false,exp:"'Fitossanitário' é medida de barreira comercial, não empresa."}]},
+ {p:"O recebimento de <b>royalties</b> (pagamento pelo uso de músicas, filmes, jogos, invenções) concentra-se:",
+  alts:[{t:"nos países do Norte, o que mostra o poder do Norte sobre o Sul.",ok:true,exp:"O Norte é dono das patentes e criações, então recebe mais."},
+   {t:"nos países periféricos do Sul.",ok:false,exp:"É o contrário: concentra-se no Norte rico."},
+   {t:"apenas nos países da União Europeia.",ok:false,exp:"Não é exclusivo da UE."},
+   {t:"igualmente em todos os países do mundo.",ok:false,exp:"Justamente o que não acontece: é bem desigual."}]},
+ {p:"O acesso à <b>internet</b> é desigual no mundo principalmente porque:",
+  alts:[{t:"depende de infraestrutura cara (fibra óptica, torres, data centers), que existe mais nos países ricos.",ok:true,exp:"Esses 'fixos geográficos' se concentram no Norte desenvolvido."},
+   {t:"a internet é proibida nos países pobres.",ok:false,exp:"Não é proibida; o problema é a falta de infraestrutura."},
+   {t:"só quem fala inglês pode acessar a internet.",ok:false,exp:"O inglês domina o conteúdo, mas não é preciso falá-lo para acessar."},
+   {t:"os países ricos escondem os cabos submarinos.",ok:false,exp:"O motivo é o custo e a distribuição da infraestrutura."}]}
+];
+
+/* ================= SALVAMENTO ================= */
+const KEY='geo9_ccf_c1415_quiz_v1';
+let estado={resp:{}, ordem:{}, finalizado:false, codigo:'', acertos:0, desbloq:false, ts:null};
+let mem={};
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return mem[k]||null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete mem[k];}}
+function carregar(){try{const s=lsGet(KEY);if(s)estado=JSON.parse(s);}catch(e){}}
+function salvar(){estado.ts=new Date().toISOString();lsSet(KEY,JSON.stringify(estado));pintarInfo();}
+function pintarInfo(){const el=document.getElementById('saveinfo');
+  if(estado.ts){const d=new Date(estado.ts);el.innerHTML='💾 Salvo: <b>'+d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'</b>';}
+  else el.textContent='Suas respostas são salvas sozinhas.';}
+
+/* ================= MODAL ================= */
+function modalConfirm(html,onSim,txtSim,txtNao){document.getElementById('modalTxt').innerHTML=html;const ac=document.getElementById('modalAcoes');ac.innerHTML='';
+  const b1=document.createElement('button');b1.className='ghost';b1.textContent=txtNao||'Cancelar';b1.onclick=()=>document.getElementById('modalBg').classList.remove('on');
+  const b2=document.createElement('button');b2.textContent=txtSim||'Confirmar';b2.onclick=()=>{document.getElementById('modalBg').classList.remove('on');onSim&&onSim();};
+  ac.appendChild(b1);ac.appendChild(b2);document.getElementById('modalBg').classList.add('on');}
+function modalInfo(html){document.getElementById('modalTxt').innerHTML=html;const ac=document.getElementById('modalAcoes');ac.innerHTML='';
+  const b=document.createElement('button');b.textContent='Ok';b.onclick=()=>document.getElementById('modalBg').classList.remove('on');ac.appendChild(b);document.getElementById('modalBg').classList.add('on');}
+
+/* ================= EMBARALHAR (semente fixa por questão) ================= */
+function embaralha(n,seed){let idx=[...Array(n).keys()];let s=seed;
+  for(let i=n-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}return idx;}
+function ordemDe(i){if(!estado.ordem[i]){estado.ordem[i]=embaralha(QUESTOES[i].alts.length,(i+1)*7919);}return estado.ordem[i];}
+
+/* ================= RENDER ================= */
+const LETRAS=['A','B','C','D','E'];
+function render(){
+  const cont=document.getElementById('perguntas');cont.innerHTML='';
+  QUESTOES.forEach((q,i)=>{
+    const ord=ordemDe(i);
+    const div=document.createElement('div');div.className='q';div.id='q'+i;
+    let alts='';
+    ord.forEach((oi,pos)=>{
+      const a=q.alts[oi];
+      const sel=estado.resp[i]===oi;
+      alts+=`<label class="alt${sel?' sel':''}" id="alt${i}_${pos}" onclick="escolher(${i},${oi},${pos})">
+        <span class="letra">${LETRAS[pos]})</span>${a.t}
+        <div class="exp" id="exp${i}_${pos}"></div></label>`;
+    });
+    div.innerHTML=`<div class="enun"><span class="num">${i+1}</span>${q.p}</div>${alts}`;
+    cont.appendChild(div);
+  });
+  atualizarContagem();pintarInfo();
+  if(estado.finalizado) mostrarCodigoBox();
+  if(estado.desbloq) revelarGabarito();
+}
+function escolher(i,oi,pos){
+  if(estado.finalizado)return;
+  estado.resp[i]=oi;
+  const ord=ordemDe(i);
+  ord.forEach((_,p)=>{const el=document.getElementById('alt'+i+'_'+p);if(el)el.classList.remove('sel');});
+  const el=document.getElementById('alt'+i+'_'+pos);if(el)el.classList.add('sel');
+  atualizarContagem();salvar();
+}
+function atualizarContagem(){
+  const n=Object.keys(estado.resp).length;
+  document.getElementById('contResp').textContent=n+' de '+QUESTOES.length+' respondidas';
+  const b=document.getElementById('btnFinalizar');if(b&&!estado.finalizado)b.disabled=(n<QUESTOES.length);
+}
+function contaAcertos(){let a=0;QUESTOES.forEach((q,i)=>{const oi=estado.resp[i];if(oi!=null&&q.alts[oi]&&q.alts[oi].ok)a++;});return a;}
+function gerarCodigo(pref,ac){const L='ABCDEFGHJKLMNPQRSTUVWXYZ';const y=L[Math.floor(Math.random()*L.length)]+L[Math.floor(Math.random()*L.length)];
+  return pref+'-'+String(ac).padStart(2,'0')+'-'+y;}
+
+function finalizar(forcado){
+  if(!forcado){const n=Object.keys(estado.resp).length;if(n<QUESTOES.length)return;}
+  estado.finalizado=true;
+  estado.acertos=contaAcertos();
+  if(!estado.codigo)estado.codigo=gerarCodigo('MED',estado.acertos);
+  salvar();
+  document.getElementById('btnFinalizar').disabled=true;
+  mostrarCodigoBox();
+  document.getElementById('codigoBox').scrollIntoView({behavior:'smooth'});
+}
+function mostrarCodigoBox(){
+  const box=document.getElementById('codigoBox');box.classList.add('on');
+  box.innerHTML=`<h2 style="margin-top:0">🏁 Quiz finalizado!</h2>
+    <p>Mostre este código para a sua mãe. Ele guarda quantas você acertou.</p>
+    <div class="codigo-grande">${estado.codigo}</div>
+    <p style="color:var(--muted);font-size:.9rem">Para liberar o <b>gabarito comentado</b>, digite o código acima:</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input id="codeInput" placeholder="MED-..." value="${estado.desbloq?estado.codigo:''}">
+      <button onclick="conferirCodigo()">🔓 Liberar gabarito</button></div>
+    <div id="codeMsg" style="margin-top:8px;font-size:.9rem;color:var(--muted)"></div>`;
+  if(estado.desbloq){const m=document.getElementById('codeMsg');if(m)m.innerHTML='Gabarito liberado. Você acertou <b>'+estado.acertos+' de '+QUESTOES.length+'</b>. ✅';}
+}
+function conferirCodigo(){
+  const v=(document.getElementById('codeInput').value||'').trim().toUpperCase();
+  const msg=document.getElementById('codeMsg');
+  if(v===estado.codigo){estado.desbloq=true;salvar();revelarGabarito();
+    msg.innerHTML='Gabarito liberado. Você acertou <b>'+estado.acertos+' de '+QUESTOES.length+'</b>. ✅';}
+  else{msg.textContent='Código incorreto. Confira as letras e números.';}
+}
+function revelarGabarito(){
+  QUESTOES.forEach((q,i)=>{
+    const ord=ordemDe(i);
+    ord.forEach((oi,pos)=>{
+      const a=q.alts[oi];const el=document.getElementById('alt'+i+'_'+pos);const exp=document.getElementById('exp'+i+'_'+pos);
+      if(!el)return;el.classList.add('cinza');
+      if(a.ok){el.classList.remove('cinza');el.classList.add('correta');if(exp){exp.className='exp on ok';exp.innerHTML='✔ Correta — '+a.exp;}}
+      else{if(estado.resp[i]===oi){el.classList.add('errada-sel');}if(exp){exp.className='exp on no';exp.innerHTML='✗ '+a.exp;}}
+    });
+  });
+}
+
+/* ================= EXPORTAR / IMPORTAR / ZERAR ================= */
+function exportar(){const out={quiz:estado};
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='progresso-quiz-geografia9.json';a.click();}
+function importar(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const o=JSON.parse(r.result);if(o.quiz)estado=o.quiz;else estado=o;salvar();render();modalInfo('<p>✅ Importado!</p>');}catch(e){modalInfo('<p>Arquivo inválido.</p>');}};
+  r.readAsText(f);}
+function zerar(){modalConfirm('<p><b>Zerar tudo?</b></p><p>Apaga as respostas e o código, para outra criança usar.</p>',
+  ()=>{estado={resp:{},ordem:{},finalizado:false,codigo:'',acertos:0,desbloq:false,ts:null};lsDel(KEY);document.getElementById('codigoBox').classList.remove('on');render();modalInfo('<p>🗑️ Zerado!</p>');},'Sim, zerar','Cancelar');}
+
+carregar();render();
+</script>
+</body>
+</html>
