@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado — Geografia 9º ano (CCF) · Feira das Nações</title>
+<style>
+  :root{--bg:#fff7ec;--panel:#ffffff;--panel2:#fff3df;--line:#f0dcc0;--ink:#33261a;--muted:#8a7a66;
+    --blue:#2b7fff;--navy:#12408a;--red:#ff5d5d;--red2:#d63232;--green:#12b886;--green2:#0e916c;--yellow:#ffcf33;--purple:#8b5cf6;--grey:#b9a98f;}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(900px 520px at 8% -8%,#d6e2ff88,transparent),radial-gradient(820px 480px at 96% 0%,#ffe0d6aa,transparent),var(--bg);
+    color:var(--ink);font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:18px;line-height:1.6}
+  .wrap{max-width:860px;margin:0 auto;padding:14px 16px 90px}
+  header{position:relative;border-radius:16px 16px 0 0;background:linear-gradient(120deg,#0e2f63,#12408a);color:#fff;padding:22px 22px 18px;border:1px solid #0e2f63;border-bottom:none}
+  header h1{margin:.1em 0;font-size:1.5rem} header p{margin:.2em 0;color:#d6e2ff}
+  .chip{display:inline-block;background:#ffffff26;border:1px solid #ffffff6b;color:#fff;font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+  .barra-vermelha{height:8px;background:linear-gradient(90deg,var(--red),#b3161b);border-radius:0 0 4px 4px;margin-bottom:16px;border:1px solid #a92f22;border-top:none}
+  .cabec{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:.92rem;color:var(--muted);box-shadow:0 4px 14px #eab97533}
+  .cabec b{color:var(--ink)}
+  .salvar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:16px}
+  .salvar .info{color:var(--muted);font-size:.85rem;flex:1 1 200px}
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:10px;padding:9px 14px;font-size:.92rem;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--green),#3bd9a5)}
+  button.ghost{background:#fff3df;color:var(--ink);border:1px solid var(--line)}
+  button.vermelho{background:linear-gradient(90deg,var(--red),#c81e23);color:#fff}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;margin-bottom:14px;box-shadow:0 6px 18px #eab97522}
+  .q .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;font-weight:800;margin-right:8px;background:linear-gradient(135deg,#12408a,#2b7fff);color:#fff}
+  .q .val{float:right;color:var(--muted);font-size:.8rem;font-weight:700}
+  .badges{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 8px}
+  .tag{display:inline-block;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.4px;padding:2px 9px;border-radius:999px}
+  .tag.cap14{background:#e3f0ff;color:var(--navy);border:1px solid #b7d6ff}
+  .tag.cap15{background:#efe4ff;color:#5b2fd0;border:1px solid #d3bcff}
+  .tag.tipo{background:#fff2df;color:#9a5a00;border:1px solid #ffd9a8}
+  .enun{font-weight:700;color:#26364a;margin-bottom:10px}
+  .afirm{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+  .afirm div{margin:3px 0}
+  .alt{display:block;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:7px 0;cursor:pointer;transition:.15s}
+  .alt:hover{border-color:var(--blue)}
+  .alt.sel{border-color:var(--blue);background:#eaf2ff}
+  .alt .letra{font-weight:800;color:var(--navy);margin-right:8px}
+  .alt.correta{border-color:var(--green);background:#e5faf1}
+  .alt.errada-sel{border-color:var(--red);background:#fff0ee}
+  .alt.cinza{opacity:.7}
+  .som-item{display:flex;gap:10px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 13px;margin:7px 0;cursor:pointer}
+  .som-item input{margin-top:4px}
+  .som-item .vv{font-weight:800;color:var(--navy);min-width:26px}
+  .som-item.cert{border-color:var(--green);background:#e5faf1}
+  .som-item.err{border-color:var(--red);background:#fff0ee}
+  .som-hint{font-size:.85rem;color:var(--muted);margin:6px 0}
+  .som-soma{margin-top:8px;font-weight:800;color:var(--navy)}
+  .exp{display:none;font-size:.88rem;color:var(--muted);margin-top:6px;padding-left:6px;border-left:3px solid var(--line)}
+  .exp.on{display:block}.exp.ok{border-color:var(--green);color:#0e7a5c}.exp.no{border-color:var(--grey)}
+  .fb{display:none;font-size:.9rem;background:#fff7d6;border:1px solid #e8c53d;color:#8a6d00;border-radius:10px;padding:9px 12px;margin-top:8px}
+  .barra-fixa{position:sticky;bottom:0;background:#fff7ecf2;border-top:1px solid var(--line);margin:0 -16px;padding:12px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;z-index:30}
+  .barra-fixa .cont{color:var(--muted);font-size:.9rem;flex:1}
+  .aviso-falta{display:none;color:var(--red2);font-size:.85rem}
+  .codigo-box{background:var(--panel);border:1px solid var(--red);border-radius:16px;padding:20px;margin-bottom:16px;display:none;box-shadow:0 6px 18px #ff5d5d22}
+  .codigo-box.on{display:block}
+  .codigo-grande{font-size:1.8rem;font-weight:800;letter-spacing:2px;color:var(--red2);margin:8px 0}
+  .codigo-box input{font-family:inherit;font-size:1rem;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);width:150px;text-transform:uppercase}
+  .modal-bg{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;background:#33261a80;padding:20px}
+  .modal-bg.on{display:flex}
+  .modal-card{max-width:430px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .modal-acoes{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="modal-bg" id="modalBg"><div class="modal-card"><div id="modalTxt"></div><div class="modal-acoes" id="modalAcoes"></div></div></div>
+
+<div class="wrap">
+  <header><span class="chip">📝 Feira das Nações · Simulado</span>
+    <h1>Simulado — Geografia 9º ano</h1>
+    <p>Colégio Coração Feliz · estilo vestibular</p></header>
+  <div class="barra-vermelha"></div>
+  <div class="cabec"><b>Prova de Geografia — 24/09</b> · 9º ano · caps. 14 e 15<br>
+    28 questões: <b>16 múltipla escolha + 6 números romanos + 6 somatório</b>. Nos somatórios, marque TODAS as afirmativas corretas — a resposta é a <b>soma</b> dos números (01, 02, 04, 08, 16). No fim, gere seu <b>código SIM</b> para a mãe liberar o gabarito.</div>
+  <div class="salvar"><div class="info" id="saveinfo">Suas respostas são salvas sozinhas.</div>
+    <button class="ghost" onclick="exportar()">📥 Exportar</button>
+    <button class="ghost" onclick="document.getElementById('imp').click()">📤 Importar</button>
+    <input id="imp" type="file" accept="application/json" style="display:none" onchange="importar(event)">
+    <button class="ghost" onclick="zerar()">🗑️ Zerar tudo</button></div>
+
+  <div class="codigo-box" id="codigoBox"></div>
+  <div id="perguntas"></div>
+
+  <div class="barra-fixa">
+    <span class="cont" id="contResp">0 de 28 respondidas <span class="aviso-falta" id="avisoFalta">— responda todas para finalizar</span></span>
+    <button class="vermelho" id="btnFinalizar" onclick="finalizar()" disabled>🏁 Finalizar e gerar código</button></div>
+</div>
+
+<script>
+/* ================= QUESTÕES (base: Callis Geografia 9 — Livro 2, caps. 14 e 15) ================= */
+const QUESTOES=[
+ /* ---------- MÚLTIPLA ESCOLHA ---------- */
+ {tipo:"mc",cap:"cap14",p:"Os blocos econômicos surgiram principalmente:",
+  alts:[{t:"na Europa, depois da 2ª Guerra Mundial, ampliando-se no fim dos anos 1980.",ok:true,exp:"Nasceram na Europa e cresceram com a globalização, no fim dos anos 1980."},
+   {t:"na Ásia, antes da 1ª Guerra Mundial.",ok:false,exp:"Surgiram na Europa, não na Ásia, e após a 2ª Guerra."},
+   {t:"na África, durante a colonização.",ok:false,exp:"Não têm origem na colonização africana."},
+   {t:"na América, no século XVIII.",ok:false,exp:"A origem foi europeia, no século XX."}]},
+ {tipo:"mc",cap:"cap14",p:"A <b>soberania</b>, da qual os países abrem mão em parte ao entrar num bloco, é:",
+  alts:[{t:"o direito de todo país tomar sozinho as próprias decisões.",ok:true,exp:"Soberania é o poder do país de decidir por si."},
+   {t:"o conjunto de tarifas de importação.",ok:false,exp:"Isso são barreiras comerciais."},
+   {t:"a moeda única de um bloco.",ok:false,exp:"Moeda única é da união monetária."},
+   {t:"a livre circulação de mercadorias.",ok:false,exp:"Isso é característica de blocos, não a definição de soberania."}]},
+ {tipo:"mc",cap:"cap14",p:"Numa <b>zona de livre-comércio</b>, o que acontece?",
+  alts:[{t:"As barreiras alfandegárias entre os membros são retiradas.",ok:true,exp:"É o primeiro grau de integração: tira as tarifas entre os membros."},
+   {t:"Todos passam a usar a mesma moeda.",ok:false,exp:"Moeda única é da união monetária."},
+   {t:"Criam-se leis comuns de imigração e segurança.",ok:false,exp:"Isso é da união política."},
+   {t:"Há livre circulação de pessoas entre os países.",ok:false,exp:"Isso começa no mercado comum."}]},
+ {tipo:"mc",cap:"cap14",p:"O grau de integração em que os países adotam a <b>mesma moeda</b>, controlada por um único banco central, é a:",
+  alts:[{t:"união monetária.",ok:true,exp:"Moeda única + banco central único = união monetária."},
+   {t:"zona de livre-comércio.",ok:false,exp:"Essa só retira tarifas entre os membros."},
+   {t:"união aduaneira.",ok:false,exp:"Essa iguala as regras de importação, não a moeda."},
+   {t:"união política.",ok:false,exp:"A união política trata de leis comuns além da economia."}]},
+ {tipo:"mc",cap:"cap14",p:"Em 1950, Robert Schuman propôs a <b>CECA</b>, que permitia comercializar sem tarifas:",
+  alts:[{t:"o carvão e o aço.",ok:true,exp:"CECA = Comunidade Europeia do Carvão e do Aço."},
+   {t:"o petróleo e o gás.",ok:false,exp:"A CECA era de carvão e aço."},
+   {t:"o trigo e o milho.",ok:false,exp:"Não era sobre grãos."},
+   {t:"o ouro e a prata.",ok:false,exp:"Não era sobre metais preciosos."}]},
+ {tipo:"mc",cap:"cap14",p:"Os <b>Tratados de Roma</b> (1957) criaram:",
+  alts:[{t:"a EURATOM (energia atômica) e a CEE (Comunidade Econômica Europeia).",ok:true,exp:"Deram origem ao Mercado Comum Europeu."},
+   {t:"a União Europeia e o euro.",ok:false,exp:"Isso foi Maastricht (1992) e 2002."},
+   {t:"a CECA e o Plano Marshall.",ok:false,exp:"A CECA é de 1950 e o Plano Marshall é anterior."},
+   {t:"o Mercosul e a APEC.",ok:false,exp:"Esses são blocos de outras regiões e épocas."}]},
+ {tipo:"mc",cap:"cap14",p:"O <b>Tratado de Maastricht</b> (1992) é conhecido por:",
+  alts:[{t:"criar a União Europeia e definir a moeda única.",ok:true,exp:"Maastricht deu origem à UE."},
+   {t:"tirar o Reino Unido da União Europeia.",ok:false,exp:"Isso é o Brexit (2020)."},
+   {t:"criar a Comunidade do Carvão e do Aço.",ok:false,exp:"Essa é a CECA, de 1950."},
+   {t:"acabar com o Parlamento europeu.",ok:false,exp:"Ao contrário, reforçou as instituições da UE."}]},
+ {tipo:"mc",cap:"cap14",p:"O <b>Banco Central Europeu (BCE)</b>, responsável pela moeda da Zona do Euro, fica em:",
+  alts:[{t:"Frankfurt, na Alemanha.",ok:true,exp:"O BCE fica em Frankfurt desde 1999."},
+   {t:"Bruxelas, na Bélgica.",ok:false,exp:"Em Bruxelas fica o Parlamento europeu."},
+   {t:"Paris, na França.",ok:false,exp:"O BCE não fica em Paris."},
+   {t:"Lisboa, em Portugal.",ok:false,exp:"O BCE não fica em Lisboa."}]},
+ {tipo:"mc",cap:"cap14",p:"O <b>Brexit</b> foi:",
+  alts:[{t:"a saída do Reino Unido da União Europeia, oficializada em 2020.",ok:true,exp:"'British' + 'exit'. Referendo em 2016, saída em 2020."},
+   {t:"a entrada do Reino Unido no euro.",ok:false,exp:"O Reino Unido nem adotou o euro."},
+   {t:"a criação do Mercado Comum Europeu.",ok:false,exp:"Isso foi bem antes, com a CEE."},
+   {t:"a expansão da UE para o Leste.",ok:false,exp:"Essa é outra coisa, do início do séc. XXI."}]},
+ {tipo:"mc",cap:"cap14",p:"Sobre a <b>China</b> no comércio mundial, é correto afirmar que:",
+  alts:[{t:"é o maior país-fábrica do planeta e entrou na OMC em 2001.",ok:true,exp:"A China é a grande fábrica mundial e entrou na OMC em 2001."},
+   {t:"não participa do comércio internacional.",ok:false,exp:"É uma das maiores potências comerciais."},
+   {t:"foi fundadora da União Europeia.",ok:false,exp:"A UE é um bloco europeu."},
+   {t:"só compra produtos industrializados da África.",ok:false,exp:"É o contrário: compra matérias-primas e vende industrializados."}]},
+ {tipo:"mc",cap:"cap14",p:"A <b>APEC</b> (Cooperação Econômica Ásia-Pacífico), criada em 1993, é:",
+  alts:[{t:"uma zona de livre-comércio com membros muito diferentes entre si.",ok:true,exp:"Membros heterogêneos; decisões giram em torno de EUA e China."},
+   {t:"uma união política com leis comuns.",ok:false,exp:"É apenas zona de livre-comércio."},
+   {t:"um bloco só de países africanos.",ok:false,exp:"É da região Ásia-Pacífico."},
+   {t:"a moeda única da Ásia.",ok:false,exp:"Não é uma moeda; é um bloco."}]},
+ {tipo:"mc",cap:"cap15",p:"Na divisão entre <b>centrais e periféricos</b>, os países periféricos são descritos como os lugares:",
+  alts:[{t:"do 'obedecer', que fornecem matérias-primas e produtos de baixa tecnologia.",ok:true,exp:"A periferia fornece matérias-primas; os centrais dominam a tecnologia."},
+   {t:"do 'mandar', que dominam a alta tecnologia.",ok:false,exp:"Isso descreve os países centrais."},
+   {t:"que recebem mais royalties do mundo.",ok:false,exp:"Os royalties se concentram no Norte central."},
+   {t:"que não têm nenhuma desigualdade interna.",ok:false,exp:"A desigualdade não define centro/periferia dessa forma."}]},
+ {tipo:"mc",cap:"cap15",p:"O <b>Índice de Gini</b>, criado pelo matemático Conrado Gini, serve para medir:",
+  alts:[{t:"a concentração de renda (a desigualdade) de um país.",ok:true,exp:"Compara os 20% mais pobres com os 20% mais ricos."},
+   {t:"o número de blocos econômicos do mundo.",ok:false,exp:"Não tem relação com blocos."},
+   {t:"o tamanho do território de um país.",ok:false,exp:"Não mede território."},
+   {t:"a quantidade de patentes de uma empresa.",ok:false,exp:"Não mede patentes."}]},
+ {tipo:"mc",cap:"cap15",p:"Uma <b>patente</b> garante a quem a possui:",
+  alts:[{t:"o monopólio do lucro sobre uma invenção por um período.",ok:true,exp:"Protege a criação e o lucro por um tempo."},
+   {t:"a entrada automática num bloco econômico.",ok:false,exp:"Patente não tem relação com blocos."},
+   {t:"a isenção de impostos para sempre.",ok:false,exp:"Patente não isenta impostos."},
+   {t:"a livre circulação de pessoas.",ok:false,exp:"Isso é do mercado comum."}]},
+ {tipo:"mc",cap:"cap15",p:"O termo <b>'multinacional'</b> foi substituído por 'transnacional'. As transnacionais de automóveis são chamadas de:",
+  alts:[{t:"montadoras.",ok:true,exp:"As transnacionais de automóveis são as montadoras."},
+   {t:"aduaneiras.",ok:false,exp:"'Aduaneiro' está ligado a barreiras comerciais."},
+   {t:"periféricas.",ok:false,exp:"Não é esse o termo."},
+   {t:"fitossanitárias.",ok:false,exp:"'Fitossanitário' é uma medida de barreira comercial."}]},
+ {tipo:"mc",cap:"cap15",p:"O recebimento de <b>royalties</b> (uso de músicas, filmes, jogos e invenções patenteadas) concentra-se:",
+  alts:[{t:"nos países do Norte, mostrando o poder do Norte sobre o Sul.",ok:true,exp:"O Norte é dono das patentes e criações."},
+   {t:"nos países periféricos do Sul.",ok:false,exp:"É o contrário: concentra-se no Norte."},
+   {t:"de forma igual em todos os países.",ok:false,exp:"É bem desigual."},
+   {t:"apenas nos países da Oceania.",ok:false,exp:"Não é exclusivo da Oceania."}]},
+ /* ---------- NÚMEROS ROMANOS ---------- */
+ {tipo:"rom",cap:"cap14",p:"Sobre os <b>graus de integração</b> dos blocos, analise as afirmativas:",
+  afirm:["Na zona de livre-comércio, retiram-se as barreiras entre os membros.",
+   "No mercado comum há livre circulação de pessoas, serviços e capitais.",
+   "Na união monetária, cada país mantém a sua própria moeda.",
+   "Na união política, criam-se leis comuns além da economia."],
+  alts:[{t:"Apenas I, II e IV estão corretas.",ok:true,exp:"A III é falsa: na união monetária adota-se a mesma moeda."},
+   {t:"Apenas I e III estão corretas.",ok:false,exp:"A III é falsa; a II e a IV são verdadeiras."},
+   {t:"Apenas II e III estão corretas.",ok:false,exp:"A III é falsa; a I e a IV são verdadeiras."},
+   {t:"Todas estão corretas.",ok:false,exp:"A III é falsa."}]},
+ {tipo:"rom",cap:"cap14",p:"Sobre a <b>União Europeia</b>, analise as afirmativas:",
+  afirm:["O Tratado de Maastricht (1992) criou a União Europeia.",
+   "O euro passou a circular em 2002.",
+   "Todos os países da UE adotaram o euro.",
+   "O BCE, em Frankfurt, cuida da política monetária da Zona do Euro."],
+  alts:[{t:"Apenas I, II e IV estão corretas.",ok:true,exp:"A III é falsa: nem todos adotaram o euro (ex.: Dinamarca)."},
+   {t:"Apenas I e III estão corretas.",ok:false,exp:"A III é falsa."},
+   {t:"Apenas III e IV estão corretas.",ok:false,exp:"A III é falsa; I e II são verdadeiras."},
+   {t:"Todas estão corretas.",ok:false,exp:"A III é falsa."}]},
+ {tipo:"rom",cap:"cap14",p:"Sobre o <b>Brexit</b> e a <b>expansão</b> da UE, analise as afirmativas:",
+  afirm:["O Brexit foi a saída do Reino Unido da União Europeia.",
+   "O referendo do Brexit foi em 2016, com 52% pela saída.",
+   "A saída oficial do Reino Unido ocorreu em 2020.",
+   "A UE liberou de imediato a livre circulação de pessoas para todos os novos membros do Leste."],
+  alts:[{t:"Apenas I, II e III estão corretas.",ok:true,exp:"A IV é falsa: a livre circulação não foi liberada logo, para evitar migração em massa."},
+   {t:"Apenas I e IV estão corretas.",ok:false,exp:"A IV é falsa; a II e a III são verdadeiras."},
+   {t:"Apenas II e IV estão corretas.",ok:false,exp:"A IV é falsa."},
+   {t:"Todas estão corretas.",ok:false,exp:"A IV é falsa."}]},
+ {tipo:"rom",cap:"cap14",p:"Sobre a <b>Ásia e a Oceania</b> no comércio, analise as afirmativas:",
+  afirm:["A China entrou na OMC em 2001.",
+   "A APEC foi criada em 1993 e é uma zona de livre-comércio.",
+   "A ASEAN reúne países do Sudeste Asiático.",
+   "A relação China-África é vista como exemplo de igualdade econômica total."],
+  alts:[{t:"Apenas I, II e III estão corretas.",ok:true,exp:"A IV é falsa: é vista como 'novo neocolonialismo', não igualdade."},
+   {t:"Apenas I e IV estão corretas.",ok:false,exp:"A IV é falsa; II e III são verdadeiras."},
+   {t:"Apenas II e IV estão corretas.",ok:false,exp:"A IV é falsa."},
+   {t:"Todas estão corretas.",ok:false,exp:"A IV é falsa."}]},
+ {tipo:"rom",cap:"cap15",p:"Sobre a <b>desigualdade</b> e o <b>conflito Norte-Sul</b>, analise as afirmativas:",
+  afirm:["O Índice de Gini varia de 0 a 1 (ou de 0 a 100).",
+   "Quanto mais perto de 0, menor a desigualdade.",
+   "O conflito Leste-Oeste (EUA x URSS) era político-militar.",
+   "A divisão Norte-Sul é exatamente geográfica."],
+  alts:[{t:"Apenas I, II e III estão corretas.",ok:true,exp:"A IV é falsa: não é geográfica exata (ex.: Austrália e Nova Zelândia)."},
+   {t:"Apenas I e IV estão corretas.",ok:false,exp:"A IV é falsa; II e III são verdadeiras."},
+   {t:"Apenas II e IV estão corretas.",ok:false,exp:"A IV é falsa."},
+   {t:"Todas estão corretas.",ok:false,exp:"A IV é falsa."}]},
+ {tipo:"rom",cap:"cap15",p:"Sobre <b>tecnologia, P&D e internet</b>, analise as afirmativas:",
+  afirm:["P&D significa Pesquisa e Desenvolvimento.",
+   "Os royalties se concentram nos países do Norte.",
+   "A internet depende de infraestrutura como fibra óptica e data centers.",
+   "A maior parte do conteúdo da internet está em português."],
+  alts:[{t:"Apenas I, II e III estão corretas.",ok:true,exp:"A IV é falsa: mais da metade do conteúdo está em inglês."},
+   {t:"Apenas I e IV estão corretas.",ok:false,exp:"A IV é falsa; II e III são verdadeiras."},
+   {t:"Apenas II e IV estão corretas.",ok:false,exp:"A IV é falsa."},
+   {t:"Todas estão corretas.",ok:false,exp:"A IV é falsa."}]},
+ /* ---------- SOMATÓRIO ---------- */
+ {tipo:"som",cap:"cap14",p:"Sobre <b>blocos econômicos e barreiras comerciais</b>, marque as afirmativas corretas e some os números:",
+  itens:[{v:1,t:"Os blocos surgiram na Europa, após a 2ª Guerra Mundial.",ok:true},
+   {v:2,t:"Ao entrar num bloco, o país abre mão de parte da soberania.",ok:true},
+   {v:4,t:"Barreiras comerciais servem para proteger o mercado nacional.",ok:true},
+   {v:8,t:"Na zona de livre-comércio já existe uma moeda única.",ok:false},
+   {v:16,t:"A globalização aumentou a competição entre as empresas.",ok:true}],
+  fb:"A 08 é falsa — a moeda única só existe na união monetária. Soma correta: 01+02+04+16 = 23."},
+ {tipo:"som",cap:"cap14",p:"Sobre a <b>integração da Europa</b>, marque as afirmativas corretas e some os números:",
+  itens:[{v:1,t:"O Plano Marshall foi a ajuda dos EUA para reconstruir a Europa.",ok:true},
+   {v:2,t:"A CECA (1950) tratava do comércio de carvão e aço.",ok:true},
+   {v:4,t:"O Tratado de Maastricht criou a CECA.",ok:false},
+   {v:8,t:"O euro passou a circular em 2002.",ok:true},
+   {v:16,t:"O BCE fica em Frankfurt, na Alemanha.",ok:true}],
+  fb:"A 04 é falsa — Maastricht (1992) criou a União Europeia; a CECA é de 1950. Soma correta: 01+02+08+16 = 27."},
+ {tipo:"som",cap:"cap14",p:"Sobre a <b>Ásia e a Oceania</b>, marque as afirmativas corretas e some os números:",
+  itens:[{v:1,t:"A China é o maior país-fábrica do planeta.",ok:true},
+   {v:2,t:"A China entrou na OMC em 2001.",ok:true},
+   {v:4,t:"A ASEAN reúne países do Sudeste Asiático.",ok:true},
+   {v:8,t:"A CEI é formada por países da União Europeia.",ok:false},
+   {v:16,t:"Austrália e Nova Zelândia se destacam em minerais e pecuária.",ok:true}],
+  fb:"A 08 é falsa — a CEI reúne ex-repúblicas soviéticas. Soma correta: 01+02+04+16 = 23."},
+ {tipo:"som",cap:"cap15",p:"Sobre <b>países centrais, periféricos e a DIT</b>, marque as afirmativas corretas e some os números:",
+  itens:[{v:1,t:"Os países centrais são os lugares do 'mandar'.",ok:true},
+   {v:2,t:"Os periféricos fornecem matérias-primas e produtos de baixa tecnologia.",ok:true},
+   {v:4,t:"As patentes garantem o monopólio do lucro por um tempo.",ok:true},
+   {v:8,t:"Na nova DIT, a alta tecnologia é produzida na periferia.",ok:false},
+   {v:16,t:"A inovação segue um ciclo: inovação → pesquisa → riqueza.",ok:true}],
+  fb:"A 08 é falsa — a alta tecnologia é produzida nos países centrais. Soma correta: 01+02+04+16 = 23."},
+ {tipo:"som",cap:"cap15",p:"Sobre a <b>desigualdade no mundo</b>, marque as afirmativas corretas e some os números:",
+  itens:[{v:1,t:"O Índice de Gini mede a concentração de renda.",ok:true},
+   {v:2,t:"Quanto mais perto de 1, maior a desigualdade.",ok:true},
+   {v:4,t:"O conflito Norte-Sul é, hoje, mais econômico.",ok:true},
+   {v:8,t:"Austrália e Nova Zelândia, por ficarem no Sul, são consideradas pobres do 'Sul'.",ok:false},
+   {v:16,t:"O BRICS inclui Brasil, Rússia, Índia, China e África do Sul.",ok:true}],
+  fb:"A 08 é falsa — apesar de ficarem no hemisfério Sul, Austrália e Nova Zelândia são do 'Norte' rico. Soma correta: 01+02+04+16 = 23."},
+ {tipo:"som",cap:"cap15",p:"Sobre <b>transnacionais e internet</b>, marque as afirmativas corretas e some os números:",
+  itens:[{v:1,t:"'Transnacional' substituiu o termo 'multinacional'.",ok:true},
+   {v:2,t:"As transnacionais de automóveis são chamadas de montadoras.",ok:true},
+   {v:4,t:"O acesso à internet é igual em todo o mundo.",ok:false},
+   {v:8,t:"Fibra óptica, torres e data centers são fixos geográficos.",ok:true},
+   {v:16,t:"Mais da metade do conteúdo da internet está em inglês.",ok:true}],
+  fb:"A 04 é falsa — o acesso à internet é desigual, concentrado no Norte rico. Soma correta: 01+02+08+16 = 27."}
+];
+
+/* ================= SALVAMENTO ================= */
+const KEY='geo9_ccf_c1415_simulado_v1';
+let estado={resp:{},ordem:{},finalizado:false,codigo:'',acertos:0,desbloq:false,ts:null};
+let mem={};
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return mem[k]||null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete mem[k];}}
+function carregar(){try{const s=lsGet(KEY);if(s)estado=JSON.parse(s);}catch(e){}}
+function salvar(){estado.ts=new Date().toISOString();lsSet(KEY,JSON.stringify(estado));pintarInfo();}
+function pintarInfo(){const el=document.getElementById('saveinfo');
+  if(estado.ts){const d=new Date(estado.ts);el.innerHTML='💾 Salvo: <b>'+d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'</b>';}
+  else el.textContent='Suas respostas são salvas sozinhas.';}
+
+/* ================= MODAL ================= */
+function modalConfirm(html,onSim,txtSim,txtNao){document.getElementById('modalTxt').innerHTML=html;const ac=document.getElementById('modalAcoes');ac.innerHTML='';
+  const b1=document.createElement('button');b1.className='ghost';b1.textContent=txtNao||'Cancelar';b1.onclick=()=>document.getElementById('modalBg').classList.remove('on');
+  const b2=document.createElement('button');b2.textContent=txtSim||'Confirmar';b2.onclick=()=>{document.getElementById('modalBg').classList.remove('on');onSim&&onSim();};
+  ac.appendChild(b1);ac.appendChild(b2);document.getElementById('modalBg').classList.add('on');}
+function modalInfo(html){document.getElementById('modalTxt').innerHTML=html;const ac=document.getElementById('modalAcoes');ac.innerHTML='';
+  const b=document.createElement('button');b.textContent='Ok';b.onclick=()=>document.getElementById('modalBg').classList.remove('on');ac.appendChild(b);document.getElementById('modalBg').classList.add('on');}
+
+/* ================= EMBARALHAR (mc e rom; som não embaralha) ================= */
+function embaralha(n,seed){let idx=[...Array(n).keys()];let s=seed;
+  for(let i=n-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}return idx;}
+function ordemDe(i){if(!estado.ordem[i]){estado.ordem[i]=embaralha(QUESTOES[i].alts.length,(i+1)*6151);}return estado.ordem[i];}
+
+const LETRAS=['A','B','C','D','E'];
+const ROMAN=['I','II','III','IV','V'];
+
+function somaCorreta(q){return q.itens.filter(x=>x.ok).reduce((a,x)=>a+x.v,0);}
+function respondida(i){const q=QUESTOES[i];const r=estado.resp[i];
+  if(q.tipo==='som')return Array.isArray(r)&&r.length>=1;
+  return r!==undefined&&r!==null;}
+function acertou(i){const q=QUESTOES[i];const r=estado.resp[i];
+  if(q.tipo==='som'){if(!Array.isArray(r))return false;return r.reduce((a,b)=>a+b,0)===somaCorreta(q);}
+  return r!=null && q.alts[r] && q.alts[r].ok;}
+
+/* ================= RENDER ================= */
+function render(){
+  const cont=document.getElementById('perguntas');cont.innerHTML='';
+  QUESTOES.forEach((q,i)=>{
+    const tipoLabel=q.tipo==='mc'?'Múltipla escolha':(q.tipo==='rom'?'Números romanos':'Somatório');
+    const capLabel=q.cap==='cap14'?'Cap. 14':'Cap. 15';
+    let corpo='';
+    if(q.tipo==='mc'||q.tipo==='rom'){
+      let afirmHtml='';
+      if(q.tipo==='rom'){afirmHtml='<div class="afirm">'+q.afirm.map((a,k)=>'<div><b>'+ROMAN[k]+'.</b> '+a+'</div>').join('')+'</div>';}
+      const ord=ordemDe(i);
+      const opts=ord.map((oi,pos)=>{
+        const a=q.alts[oi];const sel=estado.resp[i]===oi;
+        return `<label class="alt${sel?' sel':''}" id="alt${i}_${pos}" onclick="escolher(${i},${oi},${pos})">
+          <span class="letra">${LETRAS[pos]})</span>${a.t}<div class="exp" id="exp${i}_${pos}"></div></label>`;
+      }).join('');
+      corpo=afirmHtml+opts;
+    } else {
+      const arr=Array.isArray(estado.resp[i])?estado.resp[i]:[];
+      const itens=q.itens.map((it)=>{
+        let cls='som-item';const marc=arr.includes(it.v);
+        if(estado.desbloq){if(it.ok)cls+=' cert';else if(marc)cls+=' err';}
+        return `<label class="${cls}" id="som${i}_${it.v}"><input type="checkbox" ${marc?'checked':''} ${estado.finalizado?'disabled':''} onclick="respSom(${i},${it.v})">
+          <span class="vv">${String(it.v).padStart(2,'0')}</span><span>${it.t}</span></label>`;
+      }).join('');
+      const somaAtual=arr.reduce((a,b)=>a+b,0);
+      let somaLinha=`<div class="som-soma">Soma marcada: ${String(somaAtual).padStart(2,'0')}</div>`;
+      if(estado.desbloq){somaLinha+=`<div class="som-soma" style="color:var(--green2)">✔ Soma correta: ${String(somaCorreta(q)).padStart(2,'0')}</div>`;}
+      corpo='<div class="som-hint">Marque TODAS as corretas. A resposta é a soma dos números (01+02+04+08+16).</div>'+itens+somaLinha;
+    }
+    const fb=(estado.desbloq&&q.tipo==='som')?`<div class="fb" style="display:block">💡 ${q.fb}</div>`:'';
+    const div=document.createElement('div');div.className='q';div.id='q'+i;
+    div.innerHTML=`<div class="badges"><span class="tag ${q.cap}">${capLabel}</span><span class="tag tipo">${tipoLabel}</span></div>
+      <div class="enun"><span class="val">(0,4)</span><span class="num">${i+1}</span>${q.p}</div>${corpo}${fb}`;
+    cont.appendChild(div);
+  });
+  atualizarContagem();pintarInfo();
+  if(estado.finalizado)mostrarCodigoBox();
+  if(estado.desbloq)revelarGabarito();
+}
+function escolher(i,oi,pos){if(estado.finalizado)return;estado.resp[i]=oi;const ord=ordemDe(i);
+  ord.forEach((_,p)=>{const el=document.getElementById('alt'+i+'_'+p);if(el)el.classList.remove('sel');});
+  const el=document.getElementById('alt'+i+'_'+pos);if(el)el.classList.add('sel');atualizarContagem();salvar();}
+function respSom(i,v){if(estado.finalizado)return;
+  let arr=Array.isArray(estado.resp[i])?estado.resp[i].slice():[];
+  if(arr.includes(v))arr=arr.filter(x=>x!==v);else arr.push(v);
+  estado.resp[i]=arr;salvar();render();}
+function atualizarContagem(){let n=0;for(let i=0;i<QUESTOES.length;i++)if(respondida(i))n++;
+  document.getElementById('contResp').innerHTML=n+' de '+QUESTOES.length+' respondidas <span class="aviso-falta" id="avisoFalta" style="display:'+((n<QUESTOES.length&&!estado.finalizado)?'inline':'none')+'">— responda todas para finalizar</span>';
+  const b=document.getElementById('btnFinalizar');if(b&&!estado.finalizado)b.disabled=(n<QUESTOES.length);}
+function contaAcertos(){let a=0;for(let i=0;i<QUESTOES.length;i++)if(acertou(i))a++;return a;}
+function gerarCodigo(pref,ac){const L='ABCDEFGHJKLMNPQRSTUVWXYZ';const y=L[Math.floor(Math.random()*L.length)]+L[Math.floor(Math.random()*L.length)];return pref+'-'+String(ac).padStart(2,'0')+'-'+y;}
+function finalizar(forcado){if(!forcado){let n=0;for(let i=0;i<QUESTOES.length;i++)if(respondida(i))n++;if(n<QUESTOES.length)return;}
+  modalConfirm('<p><b>Finalizar o simulado?</b></p><p>Depois de finalizar, as respostas ficam travadas e o código é gerado.</p>',
+    ()=>{estado.finalizado=true;estado.acertos=contaAcertos();if(!estado.codigo)estado.codigo=gerarCodigo('SIM',estado.acertos);salvar();render();
+      document.getElementById('codigoBox').scrollIntoView({behavior:'smooth'});},'Sim, finalizar','Continuar');}
+function mostrarCodigoBox(){const box=document.getElementById('codigoBox');box.classList.add('on');
+  box.innerHTML=`<h2 style="margin-top:0">🏁 Simulado finalizado!</h2>
+    <p>Mostre este código para a sua mãe. Ele guarda quantas você acertou (de ${QUESTOES.length}).</p>
+    <div class="codigo-grande">${estado.codigo}</div>
+    <p style="color:var(--muted);font-size:.9rem">Para liberar o <b>gabarito comentado</b>, digite o código:</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input id="codeInput" placeholder="SIM-..." value="${estado.desbloq?estado.codigo:''}">
+      <button class="vermelho" onclick="conferirCodigo()">🔓 Liberar gabarito</button></div>
+    <div id="codeMsg" style="margin-top:8px;font-size:.9rem;color:var(--muted)"></div>`;
+  if(estado.desbloq){const m=document.getElementById('codeMsg');if(m)m.innerHTML='Gabarito liberado. Acertos: <b>'+estado.acertos+' de '+QUESTOES.length+'</b>. ✅';}}
+function conferirCodigo(){const v=(document.getElementById('codeInput').value||'').trim().toUpperCase();const msg=document.getElementById('codeMsg');
+  if(v===estado.codigo){estado.desbloq=true;salvar();render();document.getElementById('codeMsg')&&(document.getElementById('codeMsg').innerHTML='Gabarito liberado. Acertos: <b>'+estado.acertos+' de '+QUESTOES.length+'</b>. ✅');}
+  else msg.textContent='Código incorreto. Confira as letras e números.';}
+function revelarGabarito(){QUESTOES.forEach((q,i)=>{
+  if(q.tipo==='mc'||q.tipo==='rom'){const ord=ordemDe(i);
+    ord.forEach((oi,pos)=>{const a=q.alts[oi];const el=document.getElementById('alt'+i+'_'+pos);const exp=document.getElementById('exp'+i+'_'+pos);if(!el)return;
+      el.classList.add('cinza');
+      if(a.ok){el.classList.remove('cinza');el.classList.add('correta');if(exp){exp.className='exp on ok';exp.innerHTML='✔ Correta — '+a.exp;}}
+      else{if(estado.resp[i]===oi)el.classList.add('errada-sel');if(exp){exp.className='exp on no';exp.innerHTML='✗ '+a.exp;}}});
+  }});}
+function exportar(){const out={simulado:estado};const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='progresso-simulado-geografia9.json';a.click();}
+function importar(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const o=JSON.parse(r.result);if(o.simulado)estado=o.simulado;else estado=o;salvar();render();modalInfo('<p>✅ Importado!</p>');}catch(e){modalInfo('<p>Arquivo inválido.</p>');}};
+  r.readAsText(f);}
+function zerar(){modalConfirm('<p><b>Zerar tudo?</b></p><p>Apaga respostas e código, para outra criança usar.</p>',
+  ()=>{estado={resp:{},ordem:{},finalizado:false,codigo:'',acertos:0,desbloq:false,ts:null};lsDel(KEY);document.getElementById('codigoBox').classList.remove('on');render();modalInfo('<p>🗑️ Zerado!</p>');},'Sim, zerar','Cancelar');}
+
+carregar();render();
+</script>
+</body>
+</html>
