@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada — Geografia 9º ano (CCF) · Feira das Nações</title>
+<style>
+  :root{
+    --bg:#fff7ec; --panel:#ffffff; --panel2:#fff3df; --line:#f0dcc0;
+    --ink:#33261a; --muted:#8a7a66;
+    --blue:#2b7fff; --red:#ff5d5d; --green:#12b886; --green2:#0e916c;
+    --yellow:#ffcf33; --purple:#8b5cf6; --orange:#ff8f3f; --redbg:#fff0ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:
+      radial-gradient(900px 520px at 8% -8%, #ffe6c299, transparent),
+      radial-gradient(820px 480px at 96% 0%, #d6ecff88, transparent),
+      var(--bg);
+    color:var(--ink);font-family:'Segoe UI',system-ui,Arial,sans-serif;
+    font-size:18px;line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:14px 16px 90px}
+
+  header{position:relative;overflow:hidden;border-radius:18px;
+    background:linear-gradient(120deg,#12b886,#2b7fff 55%,#8b5cf6);
+    color:#fff;padding:26px 22px 30px;margin-bottom:16px;
+    box-shadow:0 12px 30px #2b7fff33}
+  header h1{margin:.1em 0;font-size:1.6rem;letter-spacing:.2px}
+  header p{margin:.2em 0;color:#fdf6ff}
+  .chip{display:inline-block;background:#ffffff2e;border:1px solid #ffffff7a;
+    color:#fff;font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:999px;
+    text-transform:uppercase;letter-spacing:.5px}
+  .bunting{position:absolute;left:0;right:0;bottom:0;height:22px;pointer-events:none;opacity:.9}
+
+  .progresso{position:sticky;top:0;z-index:30;margin:0 -16px 16px;
+    background:#fff7ecdd;backdrop-filter:blur(6px);padding:10px 16px;border-bottom:1px solid var(--line)}
+  .barra{height:14px;background:#fbe8cf;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .barra > i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--green),var(--blue));transition:width .5s ease}
+  .progresso small{color:var(--muted)}
+
+  .salvar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:16px;
+    box-shadow:0 4px 14px #eab97533}
+  .salvar .info{color:var(--muted);font-size:.85rem;flex:1 1 200px}
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:10px;
+    padding:9px 14px;font-size:.92rem;font-weight:700;color:#fff;
+    background:linear-gradient(90deg,var(--green),#3bd9a5)}
+  button.ghost{background:#fff3df;color:var(--ink);border:1px solid var(--line)}
+  button:disabled{opacity:.45;cursor:not-allowed;filter:grayscale(.3)}
+
+  .bloco{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:20px 20px 22px;margin-bottom:16px;position:relative;box-shadow:0 6px 18px #eab97522}
+  .bloco.travado{opacity:.55}
+  .bloco.travado .conteudo{display:none}
+  .bloco h2{margin:.1em 0 .3em;font-size:1.22rem;color:#26364a}
+  .bloco .num{display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:9px;font-weight:800;margin-right:10px;color:#fff;
+    background:linear-gradient(135deg,var(--green2),var(--blue))}
+  .lock{position:absolute;right:18px;top:18px;color:var(--muted);font-size:.85rem}
+  .pav{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--orange)}
+  .texto p{margin:.55em 0}
+  .destaque{color:var(--green2);font-weight:700}
+  .destaque-azul{color:var(--blue);font-weight:700}
+  .tipo{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;
+    padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
+  .tipo.conc{background:#e3f0ff;color:var(--blue);border:1px solid #b7d6ff}
+  .tipo.aplic{background:#e5faf1;color:var(--green2);border:1px solid #a9eccf}
+
+  .pergunta{margin:16px 0 4px;font-weight:700;color:#26364a}
+  textarea{width:100%;min-height:66px;resize:vertical;background:var(--panel2);
+    border:1px solid var(--line);border-radius:10px;color:var(--ink);
+    padding:10px 12px;font-family:inherit;font-size:.95rem;margin-top:6px}
+  textarea:focus{outline:2px solid var(--green);border-color:var(--green)}
+  .qbox.red textarea{border-color:var(--red);background:#fff0ee}
+  .avisocopia{display:none;margin-top:8px;background:#fff7d6;border:1px solid #e8c53d;
+    color:#8a6d00;border-radius:10px;padding:9px 12px;font-size:.9rem}
+  .avisocopia.on{display:block}
+  .marcavermelha{display:none;margin-top:8px;background:var(--redbg);border:1px solid #ffb3ad;
+    color:#c0392b;border-radius:10px;padding:9px 12px;font-size:.9rem}
+  .marcavermelha.on{display:block}
+
+  .modelo{display:none;margin-top:10px;background:#e5faf1;border:1px solid #a9eccf;
+    border-radius:10px;padding:10px 13px}
+  .modelo b{color:var(--green2)}
+  .checkbox-modelo{display:none;margin-top:8px;background:#f4f7ff;border:1px dashed #b7d6ff;
+    border-radius:10px;padding:10px 13px}
+  .checkbox-modelo .cq{font-size:.9rem;color:var(--muted);margin-bottom:6px}
+  .checkbox-modelo label{display:inline-flex;gap:5px;align-items:center;background:#fff;
+    border:1px solid var(--line);border-radius:999px;padding:4px 11px;cursor:pointer;font-size:.86rem;margin:3px 5px 3px 0}
+  .checkbox-modelo label.sim{border-color:var(--green)}
+  .checkbox-modelo label.nao{border-color:var(--orange)}
+
+  .acoes{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .feito{color:var(--green2);font-weight:700;display:none}
+  .status-bloco{display:none;font-weight:700;margin-left:4px}
+  .status-bloco.ok{color:var(--green2)}
+  .status-bloco.rev{color:var(--orange)}
+
+  .pegadinhas{background:var(--redbg);border:1px solid #ffb3ad;border-radius:16px;padding:20px;margin-top:8px}
+  .pegadinhas h2{color:var(--red);margin-top:0}
+  .pegadinhas ol{margin:0;padding-left:20px}
+  .pegadinhas li{margin:8px 0}
+
+  .cobertura,.revisar-final{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:16px;box-shadow:0 6px 18px #eab97522}
+  .cobertura table{width:100%;border-collapse:collapse;font-size:.92rem}
+  .cobertura td,.cobertura th{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left}
+  .cobertura th{color:var(--blue)}
+  .revisar-final ul{margin:.4em 0;padding-left:20px}
+  .revisar-final li{margin:6px 0;color:#c0392b}
+
+  .final-trancado{text-align:center;color:var(--muted);padding:26px;border:1px dashed var(--line);border-radius:16px;margin-top:8px;background:#fff}
+  .parabens{text-align:center;background:linear-gradient(135deg,#12b886,#2b7fff);color:#fff;
+    border-radius:16px;padding:24px;margin-bottom:16px;display:none}
+
+  .modal-bg{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;background:#33261a80;padding:20px}
+  .modal-bg.on{display:flex}
+  .modal-card{max-width:430px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .modal-card p{margin-top:0}
+  .modal-acoes{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal-card"><div id="modalTxt"></div><div class="modal-acoes" id="modalAcoes"></div></div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <span class="chip">🌍 Feira das Nações · Leitura Guiada</span>
+    <h1>Geografia — 9º ano · Colégio Coração Feliz</h1>
+    <p><b>Prova de 24/09</b> — Blocos econômicos, União Europeia, Ásia/Oceania, desigualdade e transnacionais (caps. 14 e 15)</p>
+    <p style="font-size:.92rem;color:#fdf6ff">Você é a <b>jovem aprendiz</b> que vai visitar os pavilhões da Feira das Nações. Leia cada pavilhão, responda <b>com as suas palavras</b> e confira. O próximo pavilhão só abre quando você termina o anterior. 🎪</p>
+    <svg class="bunting" viewBox="0 0 900 22" preserveAspectRatio="none">
+      <g>
+        <polygon points="0,0 40,0 20,20" fill="#ffcf33"/><polygon points="40,0 80,0 60,20" fill="#ff5d5d"/>
+        <polygon points="80,0 120,0 100,20" fill="#12b886"/><polygon points="120,0 160,0 140,20" fill="#2b7fff"/>
+        <polygon points="160,0 200,0 180,20" fill="#ff8f3f"/><polygon points="200,0 240,0 220,20" fill="#8b5cf6"/>
+        <polygon points="240,0 280,0 260,20" fill="#ffcf33"/><polygon points="280,0 320,0 300,20" fill="#ff5d5d"/>
+        <polygon points="320,0 360,0 340,20" fill="#12b886"/><polygon points="360,0 400,0 380,20" fill="#2b7fff"/>
+        <polygon points="400,0 440,0 420,20" fill="#ff8f3f"/><polygon points="440,0 480,0 460,20" fill="#8b5cf6"/>
+        <polygon points="480,0 520,0 500,20" fill="#ffcf33"/><polygon points="520,0 560,0 540,20" fill="#ff5d5d"/>
+        <polygon points="560,0 600,0 580,20" fill="#12b886"/><polygon points="600,0 640,0 620,20" fill="#2b7fff"/>
+        <polygon points="640,0 680,0 660,20" fill="#ff8f3f"/><polygon points="680,0 720,0 700,20" fill="#8b5cf6"/>
+        <polygon points="720,0 760,0 740,20" fill="#ffcf33"/><polygon points="760,0 800,0 780,20" fill="#ff5d5d"/>
+        <polygon points="800,0 840,0 820,20" fill="#12b886"/><polygon points="840,0 880,0 860,20" fill="#2b7fff"/>
+      </g>
+    </svg>
+  </header>
+
+  <div class="progresso">
+    <div class="barra"><i id="fill"></i></div>
+    <small id="progtxt">Pavilhão 0 de 11 visitados</small>
+  </div>
+
+  <div class="salvar">
+    <div class="info" id="saveinfo">Seu progresso é salvo sozinho neste navegador.</div>
+    <button class="ghost" onclick="exportar()">📥 Exportar progresso</button>
+    <button class="ghost" onclick="document.getElementById('imp').click()">📤 Importar</button>
+    <input id="imp" type="file" accept="application/json" style="display:none" onchange="importar(event)">
+    <button class="ghost" onclick="zerar()">🗑️ Zerar tudo</button>
+  </div>
+
+  <div id="blocos"></div>
+
+  <div id="finalTrancado" class="final-trancado">🔒 Visite os 11 pavilhões para liberar as <b>10 pegadinhas da prova</b>, a tabela de cobertura e o resumo da sua autoavaliação.</div>
+
+  <div id="parabens" class="parabens">
+    <h2>🎉 Feira concluída, jovem aprendiz!</h2>
+    <p>Você percorreu todos os pavilhões: blocos econômicos, União Europeia, Ásia/Oceania, desigualdade e transnacionais. Confira abaixo. 🌍</p>
+  </div>
+
+  <div id="pegadinhasBox"></div>
+  <div id="revisarBox"></div>
+  <div id="coberturaBox"></div>
+
+</div>
+
+<script>
+/* =================== CONTEÚDO (base: Callis Geografia 9 — Livro 2, caps. 14 e 15) =================== */
+const BLOCOS = [
+{
+ t:"O que é um bloco econômico?", pav:"Pavilhão da Integração", topico:"Blocos econômicos",
+ texto:`<p>Um <span class="destaque">bloco econômico</span> é um grupo de países que se unem para <b>integrar</b> (juntar) as suas economias e facilitar o comércio entre eles. Os blocos surgiram na <b>Europa</b>, depois da 2ª Guerra Mundial, e cresceram no fim dos anos <b>1980</b>, com a <b>globalização</b>.</p>
+ <p>Numa economia globalizada, a competição é grande: empresas e corporações com muito <b>capital</b> (dinheiro) sobrevivem melhor. Para entrar num bloco, o país abre mão de <b>parte</b> da sua <span class="destaque-azul">soberania</span> — que é o direito de todo país tomar sozinho as próprias decisões. Em troca, ganha um mercado maior.</p>
+ <p>As <span class="destaque">barreiras comerciais</span> são normas alfandegárias que um país cria para <b>proteger o seu mercado</b>: taxas e tarifas de importação, cotas, exigência de licenças e medidas fitossanitárias (de proteção sanitária).</p>`,
+ q:[
+  {p:"Com as suas palavras, o que é um bloco econômico?", tipo:"conc",
+   m:"É um grupo de países que se unem para integrar suas economias e facilitar o comércio entre eles.",
+   chk:["Falei que é uma união de países?","Falei que serve para integrar economias / facilitar o comércio?"]},
+  {p:"Ao entrar num bloco, o país 'abre mão de parte da sua soberania'. Explique, com as suas palavras, o que ele perde e o que ganha.", tipo:"aplic",
+   m:"Ele abre mão de parte do direito de decidir tudo sozinho (soberania), mas ganha acesso a um mercado maior e mais comércio.",
+   chk:["Expliquei que soberania é decidir sozinho?","Disse o que o país ganha em troca (mercado maior)?"]},
+  {p:"Um país decide taxar produtos importados e exigir licença para vender remédios estrangeiros. Que nome se dá a essas medidas e para que servem?", tipo:"aplic",
+   m:"São barreiras comerciais (normas alfandegárias). Servem para proteger o mercado nacional.",
+   chk:["Reconheci que são barreiras comerciais/alfandegárias?","Disse que servem para proteger o mercado nacional?"]}]
+},
+{
+ t:"Os cinco graus de integração", pav:"Pavilhão da Integração", topico:"Blocos econômicos",
+ texto:`<p>Os blocos têm níveis diferentes de união, do mais simples ao mais completo:</p>
+ <p><b>1) Zona de livre-comércio:</b> os países-membros <span class="destaque">retiram as barreiras alfandegárias entre si</span>.<br>
+ <b>2) União aduaneira:</b> além disso, todos adotam as <b>mesmas regras de importação</b> para produtos de fora.<br>
+ <b>3) Mercado comum:</b> soma o livre-comércio à <span class="destaque-azul">livre circulação de pessoas, serviços e capitais</span>.<br>
+ <b>4) União monetária:</b> os países adotam a <b>mesma moeda</b>, controlada por um <b>único banco central</b>.<br>
+ <b>5) União política:</b> criam <b>leis comuns</b> que vão além da economia (direitos dos cidadãos, imigração, segurança).</p>`,
+ q:[
+  {p:"Escreva os cinco tipos de bloco em ordem, do mais simples ao mais completo.", tipo:"conc",
+   m:"Zona de livre-comércio, união aduaneira, mercado comum, união monetária e união política.",
+   chk:["Comecei pela zona de livre-comércio?","Terminei na união política?","Mantive a ordem no meio?"]},
+  {p:"Dois países tiram as tarifas entre si, mas ainda cobram tarifas diferentes de países de fora. Em que grau de integração eles estão?", tipo:"aplic",
+   m:"Numa zona de livre-comércio (ainda não é união aduaneira, pois as regras para os de fora não são iguais).",
+   chk:["Respondi zona de livre-comércio?","Percebi que não é união aduaneira porque as regras externas ainda diferem?"]},
+  {p:"O que precisa acontecer num bloco para dizermos que ele chegou à união monetária? Qual a diferença para o mercado comum?", tipo:"aplic",
+   m:"Na união monetária os países adotam a mesma moeda, com um só banco central. O mercado comum só garante livre circulação de pessoas, serviços e capitais, sem moeda única.",
+   chk:["Liguei união monetária à moeda única/banco central?","Mostrei que o mercado comum não tem moeda única?"]}]
+},
+{
+ t:"A Europa se reconstrói: do Plano Marshall à CEE", pav:"Pavilhão da Europa", topico:"União Europeia",
+ texto:`<p>Depois da 2ª Guerra, a Europa Ocidental estava destruída. Os <b>EUA</b> ajudaram na reconstrução com o <span class="destaque">Plano Marshall</span>. Havia tensões por matérias-primas — por exemplo, <b>França e Alemanha</b> disputavam a região da <b>Alsácia-Lorena</b>, rica em <b>carvão e ferro</b>.</p>
+ <p>Em <b>1950</b>, <b>Robert Schuman</b> propôs a <span class="destaque-azul">CECA</span> (Comunidade Europeia do Carvão e do Aço), que permitiu comercializar carvão e aço <b>sem tarifas</b>. Em <b>1957</b>, os <b>Tratados de Roma</b> criaram a <b>EURATOM</b> (energia atômica) e a <span class="destaque-azul">CEE</span> (Comunidade Econômica Europeia).</p>
+ <p>Assim nasceu o <span class="destaque">Mercado Comum Europeu (MCE)</span>, que depois virou a chamada <b>"Europa dos 12"</b>.</p>`,
+ q:[
+  {p:"O que foi o Plano Marshall?", tipo:"conc",
+   m:"Foi a ajuda dos EUA para reconstruir a Europa Ocidental depois da 2ª Guerra Mundial.",
+   chk:["Falei que foi ajuda dos EUA?","Falei que era para reconstruir a Europa após a guerra?"]},
+  {p:"Explique por que carvão e ferro estavam no centro das tensões entre França e Alemanha, e como a CECA ajudou a diminuir isso.", tipo:"aplic",
+   m:"A Alsácia-Lorena, disputada pelos dois, era rica em carvão e ferro (matérias-primas valiosas). A CECA deixou os dois comercializarem carvão e aço sem tarifas, diminuindo a rivalidade.",
+   chk:["Liguei carvão/ferro à disputa da Alsácia-Lorena?","Expliquei que a CECA permitiu comércio de carvão e aço sem tarifas?"]},
+  {p:"Os Tratados de Roma (1957) criaram dois órgãos. Quais são eles e o que representavam?", tipo:"aplic",
+   m:"Criaram a EURATOM (Comunidade Europeia de Energia Atômica) e a CEE (Comunidade Econômica Europeia), que deu origem ao Mercado Comum Europeu.",
+   chk:["Citei a EURATOM?","Citei a CEE (e liguei ao Mercado Comum)?"]}]
+},
+{
+ t:"De Maastricht ao euro: nasce a União Europeia", pav:"Pavilhão da Europa", topico:"União Europeia",
+ texto:`<p>Em <b>1992</b>, o <span class="destaque">Tratado de Maastricht</span> (assinado na Holanda) criou a <b>União Europeia</b>. Ele definiu uma <b>moeda única</b>, um <b>Parlamento europeu</b> em <b>Bruxelas</b> eleito por <span class="destaque-azul">sufrágio universal</span> (voto direto dos cidadãos) e regras comuns de segurança, imigração e política externa.</p>
+ <p>A moeda única, o <span class="destaque">euro</span>, começou a circular em <b>2002</b>, depois de 11 anos de adequação. Quem cuida da política monetária da Zona do Euro é o <b>Banco Central Europeu (BCE)</b>, com sede em <b>Frankfurt</b>, na Alemanha, desde 1999. <b>Nem todos</b> os países adotaram o euro — o Reino Unido (quando era membro) e a Dinamarca, por exemplo, não adotaram.</p>
+ <p>As <b>12 estrelas em círculo</b> da bandeira da UE representam a <b>união e a plenitude</b>.</p>`,
+ q:[
+  {p:"O que o Tratado de Maastricht criou e em que ano?", tipo:"conc",
+   m:"Criou a União Europeia, em 1992.",
+   chk:["Falei que criou a União Europeia?","Falei o ano de 1992?"]},
+  {p:"Um cidadão europeu vota diretamente para escolher os representantes do Parlamento em Bruxelas. Que nome se dá a esse tipo de votação?", tipo:"aplic",
+   m:"Sufrágio universal (a votação direta dos cidadãos).",
+   chk:["Respondi sufrágio universal?","Mostrei que é o voto direto dos cidadãos?"]},
+  {p:"Nem todo país da UE usa o euro. Cite um exemplo e diga qual banco cuida da moeda e onde ele fica.", tipo:"aplic",
+   m:"A Dinamarca (ou o Reino Unido, quando era membro) não adotou o euro. Quem cuida da moeda é o Banco Central Europeu (BCE), em Frankfurt, na Alemanha.",
+   chk:["Dei um exemplo de país que não usa o euro?","Citei o BCE em Frankfurt?"]}]
+},
+{
+ t:"A UE cresce para o Leste — e o Reino Unido sai (Brexit)", pav:"Pavilhão da Europa", topico:"União Europeia",
+ texto:`<p>No começo do século XXI, <b>13 novos países</b> entraram na UE — <b>11 do Leste Europeu</b> (antigas repúblicas socialistas) e 2 ilhas do Mediterrâneo. Para entrar, era preciso controlar gastos e inflação e manter o <b>déficit público e a dívida em no máximo 60% do PIB</b>. Hoje o mercado consumidor da UE tem cerca de <span class="destaque">500 milhões de pessoas</span>. A livre circulação de pessoas <b>não</b> foi liberada logo para alguns novos membros, para evitar uma grande migração do Leste para o Oeste.</p>
+ <p>Em <b>2016</b>, o Reino Unido fez um <b>referendo</b>: <b>52% votaram pela saída</b> e 48% pela permanência. É o <span class="destaque-azul">Brexit</span> ("British" + "exit"), discutido desde cerca de 2010 e concretizado em <b>2020</b>.</p>
+ <p>A saída <b>prejudicou</b> a economia britânica — foi o único país do <b>G7</b> com economia menor do que antes da pandemia.</p>`,
+ q:[
+  {p:"O que foi o Brexit e em que ano ele se concretizou?", tipo:"conc",
+   m:"Foi a saída do Reino Unido da União Europeia, concretizada em 2020 (referendo em 2016).",
+   chk:["Falei que é a saída do Reino Unido da UE?","Falei o ano da saída (2020)?"]},
+  {p:"No referendo de 2016, 52% votaram pela saída e 48% pela permanência. O que esse resultado mostra sobre a decisão do país?", tipo:"aplic",
+   m:"Mostra que a decisão foi muito dividida/apertada: pouco mais da metade quis sair, e quase metade quis ficar.",
+   chk:["Percebi que a votação foi apertada/dividida?","Relacionei aos números 52% x 48%?"]},
+  {p:"Por que a UE não liberou logo a livre circulação de pessoas para alguns países novos do Leste?", tipo:"aplic",
+   m:"Para evitar um grande fluxo migratório do Leste (mais pobre) para o Oeste (mais rico) da Europa.",
+   chk:["Liguei à migração do Leste para o Oeste?","Mostrei que era para evitar um fluxo grande de pessoas?"]}]
+},
+{
+ t:"Mercosul-UE e a força da Ásia", pav:"Pavilhão do Pacífico", topico:"Ásia, Oceania e Mercosul",
+ texto:`<p>Depois de <b>25 anos</b> de negociação, em <b>dezembro de 2024</b> foi anunciado um acordo entre o <span class="destaque">Mercosul e a União Europeia</span>, que prevê reduzir tarifas e facilitar investimentos entre os dois blocos. A <b>França se opõe</b>, por causa dos seus produtores agrícolas.</p>
+ <p>Do outro lado do mundo, a <b>Ásia</b> tem grande peso no comércio: riquezas naturais, população enorme (muita mão de obra), o <b>Japão</b> com tecnologia sofisticada, os <b>Tigres Asiáticos</b> e o <b>petróleo</b> do Oriente Médio. A <span class="destaque-azul">China</span> é o <b>maior país-fábrica do planeta</b> e entrou na <b>OMC</b> (Organização Mundial do Comércio) em 2001.</p>
+ <p>A relação China-África é vista por alguns como um <span class="destaque">"novo neocolonialismo"</span>: a China <b>compra matérias-primas</b> (commodities) e <b>vende produtos industrializados</b>, sendo a maior investidora na África desde 2009. Na Oceania, <b>Austrália e Nova Zelândia</b> se destacam em minerais e pecuária.</p>`,
+ q:[
+  {p:"Por que a China é chamada de 'maior país-fábrica do planeta'?", tipo:"conc",
+   m:"Porque é o país que mais produz e fabrica mercadorias industrializadas no mundo.",
+   chk:["Mostrei que a China produz/fabrica muito?","Liguei à ideia de fábrica/indústria mundial?"]},
+  {p:"Explique por que a relação China-África é comparada a um 'novo neocolonialismo'. O que a China compra e o que vende?", tipo:"aplic",
+   m:"Porque a China compra matérias-primas (commodities) da África e vende produtos industrializados, uma relação parecida com a dos antigos colonizadores.",
+   chk:["Disse que a China compra matérias-primas?","Disse que vende industrializados?"]},
+  {p:"O acordo Mercosul-UE tem oposição da França. Pensando nos produtores agrícolas franceses, por que isso acontece?", tipo:"aplic",
+   m:"Porque, com menos tarifas, produtos agrícolas do Mercosul (mais baratos) concorreriam com os franceses, prejudicando os agricultores da França.",
+   chk:["Liguei à concorrência dos produtos agrícolas?","Mostrei que os agricultores franceses temem perder mercado?"]}]
+},
+{
+ t:"Os blocos da Ásia e da Oceania", pav:"Pavilhão do Pacífico", topico:"Ásia, Oceania e Mercosul",
+ texto:`<p>Os principais blocos dessa parte do mundo são a <span class="destaque">APEC</span> e a <span class="destaque">ASEAN</span>.</p>
+ <p>A <b>APEC</b> (Cooperação Econômica <b>Ásia-Pacífico</b>), criada em <b>1993</b>, é uma <b>zona de livre-comércio</b> com membros muito diferentes entre si (<span class="destaque-azul">heterogêneos</span>), e suas decisões giram muito em torno dos <b>EUA e da China</b>.</p>
+ <p>A <b>ASEAN</b> (Associação de Nações do <b>Sudeste Asiático</b>), criada em <b>1967</b>, virou zona de livre-comércio em 1992. Existem ainda blocos menores, como o <b>SAARC</b>, o <b>ECO</b> e a <b>CEI</b> (Comunidade de Estados Independentes), formada por <b>ex-repúblicas soviéticas</b>.</p>`,
+ q:[
+  {p:"O que são a APEC e a ASEAN, e em que ano cada uma foi criada?", tipo:"conc",
+   m:"A APEC é a Cooperação Econômica Ásia-Pacífico (1993) e a ASEAN é a Associação de Nações do Sudeste Asiático (1967); as duas são zonas de livre-comércio.",
+   chk:["Identifiquei APEC (1993) e ASEAN (1967)?","Disse que são zonas de livre-comércio?"]},
+  {p:"A APEC tem membros 'heterogêneos' e suas decisões giram em torno de EUA e China. Explique o que isso quer dizer.", tipo:"aplic",
+   m:"Heterogêneos = muito diferentes entre si (ricos e pobres, grandes e pequenos). Como EUA e China são as maiores economias, elas acabam influenciando mais as decisões.",
+   chk:["Expliquei que heterogêneo é 'muito diferente entre si'?","Liguei o peso das decisões a EUA e China?"]},
+  {p:"A CEI reúne países que eram parte de qual antigo país?", tipo:"aplic",
+   m:"Da antiga União Soviética (são ex-repúblicas soviéticas).",
+   chk:["Respondi União Soviética?","Mostrei que são ex-repúblicas soviéticas?"]}]
+},
+{
+ t:"Países centrais e periféricos: quem manda e quem obedece", pav:"Pavilhão da Desigualdade", topico:"Desigualdade e Divisão do Trabalho",
+ texto:`<p>As revoluções industriais <b>aumentaram a distância</b> entre os países. De um lado, os <span class="destaque">países centrais</span> (os lugares do <b>"mandar"</b>); de outro, os <span class="destaque">periféricos</span> (os do <b>"obedecer"</b>).</p>
+ <p>A inovação funciona como um <b>ciclo</b>: <span class="destaque-azul">inovação → pesquisa → riqueza</span>, e volta ao começo. Esse conhecimento é protegido por <b>patentes</b>, que garantem a uma empresa o <b>monopólio do lucro por um tempo</b>.</p>
+ <p>Isso cria a <span class="destaque">nova Divisão Internacional do Trabalho (DIT)</span>: os países centrais produzem mercadorias de <b>alta tecnologia</b>, enquanto a periferia fornece <b>matérias-primas</b> e produtos industrializados de <b>baixa tecnologia</b>.</p>`,
+ q:[
+  {p:"Explique a diferença entre países centrais e países periféricos.", tipo:"conc",
+   m:"Os centrais são os ricos e poderosos (o lugar do 'mandar'); os periféricos são os mais pobres e dependentes (o lugar do 'obedecer').",
+   chk:["Mostrei que centrais = ricos/mandam?","Mostrei que periféricos = pobres/obedecem?"]},
+  {p:"O que uma patente garante a uma empresa? Dê um exemplo do dia a dia (um remédio, um produto, um jogo...).", tipo:"aplic",
+   m:"Garante o monopólio do lucro sobre uma invenção por um período, impedindo que outros copiem. Ex.: a fórmula de um remédio, um modelo de celular, um jogo.",
+   chk:["Expliquei que a patente dá monopólio do lucro por um tempo?","Dei um exemplo concreto?"]},
+  {p:"Na nova Divisão Internacional do Trabalho, o que costuma ser produzido nos países centrais e o que fica com a periferia?", tipo:"aplic",
+   m:"Os centrais produzem mercadorias de alta tecnologia; a periferia fornece matérias-primas e produtos de baixa tecnologia.",
+   chk:["Disse que os centrais fazem alta tecnologia?","Disse que a periferia fica com matérias-primas / baixa tecnologia?"]}]
+},
+{
+ t:"Medindo a desigualdade: Índice de Gini e o conflito Norte-Sul", pav:"Pavilhão da Desigualdade", topico:"Desigualdade e Divisão do Trabalho",
+ texto:`<p>Para medir a <b>concentração de renda</b> de um país usa-se o <span class="destaque">Índice de Gini</span>, criado pelo matemático italiano <b>Conrado Gini</b>. Ele varia de <b>0 a 1</b> (ou de 0 a 100): quanto mais perto de <b>0</b>, <span class="destaque-azul">menor</span> a desigualdade; quanto mais perto de <b>1</b>, <span class="destaque-azul">maior</span>. Ele compara os <b>20% mais pobres</b> com os <b>20% mais ricos</b>.</p>
+ <p>O mundo também é dividido no <span class="destaque">conflito Norte-Sul</span>: Norte rico x Sul pobre. <b>Atenção:</b> não é geográfico exato — <b>Austrália e Nova Zelândia</b> ficam no Sul, mas são do "Norte" rico. Hoje o conflito é mais <b>econômico</b>; antes, o conflito <b>Leste-Oeste</b> (EUA x URSS) era <b>político-militar</b>.</p>
+ <p>O <b>BRICS</b> reúne Brasil, Rússia, Índia, China, África do Sul, Egito, Emirados Árabes, Arábia Saudita, Etiópia e Irã. A <b>OCDE</b> é a Organização para a Cooperação e Desenvolvimento Econômico.</p>`,
+ q:[
+  {p:"O que o Índice de Gini mede e como interpretamos um valor perto de 0 e um valor perto de 1?", tipo:"conc",
+   m:"Mede a concentração de renda (a desigualdade). Perto de 0 = pouca desigualdade; perto de 1 = muita desigualdade.",
+   chk:["Falei que mede concentração de renda/desigualdade?","Interpretei certo: perto de 0 = menos, perto de 1 = mais?"]},
+  {p:"Por que dizemos que a divisão Norte-Sul não é geográfica exata? Dê o exemplo do livro.", tipo:"aplic",
+   m:"Porque alguns países ricos ('do Norte') ficam no Sul do mapa. Exemplo: Austrália e Nova Zelândia, que estão no hemisfério Sul mas são considerados 'Norte' (ricos).",
+   chk:["Mostrei que a divisão é econômica, não do mapa?","Citei Austrália e Nova Zelândia?"]},
+  {p:"Um país tem Índice de Gini 0,25 e outro tem 0,60. Qual é o mais desigual? Explique.", tipo:"aplic",
+   m:"O de 0,60, porque quanto mais perto de 1 (ou 100), maior a desigualdade.",
+   chk:["Respondi o de 0,60?","Justifiquei com a regra 'mais perto de 1 = mais desigual'?"]}]
+},
+{
+ t:"Ciência, tecnologia e royalties", pav:"Pavilhão da Tecnologia", topico:"Tecnologia, P&D e Transnacionais",
+ texto:`<p>A <b>Terceira Revolução Industrial</b> ligou o <b>poder econômico</b> ao domínio de <b>novas tecnologias</b>. Por isso os países investem em <span class="destaque">Conhecimento e Tecnologia (C&T)</span> e em <span class="destaque">Pesquisa e Desenvolvimento (P&D)</span> — trabalho feito pelo <b>Estado</b> (universidades e institutos) ou por <b>empresas privadas</b>. Países com PIB alto, como <b>EUA e China</b>, investem mais em P&D.</p>
+ <p>Entre as empresas que mais investiram em P&D em <b>2024</b> estão <b>Alphabet, Meta, Apple e Microsoft</b> (EUA, software e informática), <b>Volkswagen e Mercedes-Benz</b> (Alemanha, automóveis), <b>Huawei</b> (China), <b>Samsung</b> (Coreia do Sul) e farmacêuticas como <b>Roche, Pfizer e Johnson &amp; Johnson</b>.</p>
+ <p>Os <span class="destaque-azul">royalties</span> são pagamentos pelo <b>uso de invenções e criações protegidas por patente</b> — filmes, músicas, seriados, livros, jogos de videogame etc. Quem mais recebe royalties são os <b>países do Norte</b>, o que mostra o <b>poder do Norte sobre o Sul</b>.</p>`,
+ q:[
+  {p:"O que significam as siglas C&T e P&D?", tipo:"conc",
+   m:"C&T = Conhecimento (Ciência) e Tecnologia; P&D = Pesquisa e Desenvolvimento.",
+   chk:["Acertei o que é C&T?","Acertei o que é P&D?"]},
+  {p:"O que são royalties? Dê dois exemplos de coisas que geram royalties.", tipo:"aplic",
+   m:"São pagamentos pelo uso de invenções/criações com patente. Ex.: músicas, filmes, seriados, livros ou jogos de videogame.",
+   chk:["Expliquei que royalty é pagamento pelo uso de algo patenteado?","Dei dois exemplos?"]},
+  {p:"Os royalties se concentram nos países do Norte. Por que isso é um exemplo do poder do Norte sobre o Sul?", tipo:"aplic",
+   m:"Porque o Norte é dono das patentes e criações, então recebe dinheiro do mundo todo (inclusive do Sul), aumentando a diferença entre eles.",
+   chk:["Mostrei que o Norte é dono das patentes/criações?","Liguei isso ao dinheiro que vem do Sul para o Norte?"]}]
+},
+{
+ t:"De multinacional a transnacional e a internet desigual", pav:"Pavilhão da Tecnologia", topico:"Tecnologia, P&D e Transnacionais",
+ texto:`<p>O termo <b>"multinacional"</b> foi trocado por <span class="destaque">"transnacional"</span> — empresas que atuam <b>além das fronteiras</b> dos países. As transnacionais de <b>automóveis</b> são chamadas de <b>"montadoras"</b>. O geógrafo <b>Milton Santos</b> lembrava que o <b>Estado continua forte</b>: nem as transnacionais nem as instituições supranacionais conseguem, sozinhas, impor tudo em cada território.</p>
+ <p>O acesso à <span class="destaque-azul">internet</span> também é <b>desigual</b>, concentrado no Norte rico, porque depende do desenvolvimento econômico e da <b>infraestrutura</b> — cabos de fibra óptica, torres e data centers, os chamados <b>fixos geográficos</b>; já os <b>fluxos geográficos</b> (a informação circulando) não são iguais em todo lugar.</p>
+ <p>Mais da <b>metade do conteúdo</b> da internet está em <b>inglês</b>, mas só cerca de <b>5%</b> da população mundial tem o inglês como língua materna. Em <b>cibersegurança</b>, o Brasil é o <b>2º país mais maduro das Américas</b> (UIT, 2024), enquanto os crimes virtuais crescem.</p>`,
+ q:[
+  {p:"Qual a diferença entre os termos 'multinacional' e 'transnacional'? Como se chamam as transnacionais de automóveis?", tipo:"conc",
+   m:"'Transnacional' substituiu 'multinacional' e destaca que a empresa atua além das fronteiras dos países. As de automóveis são as 'montadoras'.",
+   chk:["Expliquei que transnacional atua além das fronteiras?","Disse que as de automóveis são as montadoras?"]},
+  {p:"Explique por que o acesso à internet é desigual, usando a ideia de 'fixos geográficos' (fibra óptica, torres, data centers).", tipo:"aplic",
+   m:"Porque a internet depende de infraestrutura cara (fibra óptica, torres, data centers), que existe mais nos países ricos. Onde falta essa base, o acesso é pior.",
+   chk:["Liguei o acesso à infraestrutura (fixos)?","Mostrei que os ricos têm mais dessa base?"]},
+  {p:"Mais da metade do conteúdo da internet está em inglês, mas só ~5% do mundo fala inglês como língua materna. Que problema isso mostra?", tipo:"aplic",
+   m:"Mostra uma desigualdade: quem não fala inglês tem acesso pior à maior parte do conteúdo, o que favorece os países de língua inglesa (do Norte).",
+   chk:["Mostrei que é uma desigualdade de acesso ao conteúdo?","Liguei ao favorecimento de quem fala inglês / do Norte?"]}]
+}
+];
+
+const PEGADINHAS = [
+ "<b>Soberania:</b> entrar num bloco NÃO acaba com o país — ele abre mão de <b>parte</b> da soberania, não de tudo.",
+ "Ordem dos blocos: livre-comércio &lt; união aduaneira &lt; mercado comum &lt; união monetária &lt; união política. A <b>livre circulação de pessoas</b> só aparece a partir do <b>mercado comum</b>.",
+ "Não confunda as siglas: <b>CECA</b> (carvão e aço, 1950) x <b>CEE</b> (1957) x <b>União Europeia</b> (Maastricht, 1992). O <b>euro</b> só circulou em <b>2002</b>.",
+ "O <b>BCE</b> fica em <b>Frankfurt</b> (Alemanha). Em <b>Bruxelas</b> fica o <b>Parlamento</b>. Não troque as cidades.",
+ "Nem todo país da UE usa o <b>euro</b> (ex.: Dinamarca; o Reino Unido, quando era membro, também não).",
+ "<b>Brexit:</b> referendo em <b>2016</b> (52% x 48%), mas a saída oficial só em <b>2020</b>. Cuidado com as duas datas.",
+ "<b>Índice de Gini:</b> perto de <b>0</b> = MENOS desigual; perto de <b>1</b> (ou 100) = MAIS desigual. É fácil inverter.",
+ "<b>Norte-Sul</b> NÃO é o mapa: Austrália e Nova Zelândia ficam no <b>Sul</b>, mas são do <b>Norte</b> (ricos).",
+ "Não troque os conflitos: <b>Norte-Sul</b> é econômico (atual); <b>Leste-Oeste</b> (EUA x URSS) era político-militar (Guerra Fria).",
+ "<b>Multinacional</b> virou <b>transnacional</b>. As de automóveis são as <b>montadoras</b>. E os <b>royalties</b> se concentram no <b>Norte</b>."
+];
+
+/* =================== SALVAMENTO =================== */
+const KEY='geo9_ccf_c1415_leituraguiada_v1';
+let estado={resp:{}, chk:{}, conferido:{}, transcrita:{}, tentou:{}, ts:null};
+let mem={};
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return mem[k]||null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete mem[k];}}
+function carregar(){try{const s=lsGet(KEY);if(s)estado=JSON.parse(s);}catch(e){}}
+function salvar(){estado.ts=new Date().toISOString();lsSet(KEY,JSON.stringify(estado));pintarInfo();}
+function pintarInfo(){const el=document.getElementById('saveinfo');
+  if(estado.ts){const d=new Date(estado.ts);
+    el.innerHTML='💾 Último salvamento: <b>'+d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'</b>';}
+  else el.textContent='Seu progresso é salvo sozinho neste navegador.';}
+
+/* =================== MODAL =================== */
+function modalConfirm(html, onSim, txtSim, txtNao){
+  document.getElementById('modalTxt').innerHTML=html;
+  const ac=document.getElementById('modalAcoes');ac.innerHTML='';
+  const b1=document.createElement('button');b1.className='ghost';b1.textContent=txtNao||'Cancelar';
+  b1.onclick=()=>{document.getElementById('modalBg').classList.remove('on');};
+  const b2=document.createElement('button');b2.textContent=txtSim||'Confirmar';
+  b2.onclick=()=>{document.getElementById('modalBg').classList.remove('on');onSim&&onSim();};
+  ac.appendChild(b1);ac.appendChild(b2);
+  document.getElementById('modalBg').classList.add('on');
+}
+function modalInfo(html){
+  document.getElementById('modalTxt').innerHTML=html;
+  const ac=document.getElementById('modalAcoes');ac.innerHTML='';
+  const b=document.createElement('button');b.textContent='Ok';
+  b.onclick=()=>{document.getElementById('modalBg').classList.remove('on');};
+  ac.appendChild(b);document.getElementById('modalBg').classList.add('on');
+}
+
+/* =================== ANTICÓPIA =================== */
+function normaliza(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+  .replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);}
+function maiorSequenciaComum(a,b){
+  let best=[];const m=a.length,n=b.length;const dp=Array(n+1).fill(0);
+  for(let i=1;i<=m;i++){let prev=0;for(let j=1;j<=n;j++){const tmp=dp[j];
+    if(a[i-1]===b[j-1]){dp[j]=prev+1;if(dp[j]>best.length)best=a.slice(i-dp[j],i);}else dp[j]=0;prev=tmp;}}
+  return best;
+}
+function contemSequencia(hay,seq){ if(!seq.length)return false;
+  for(let i=0;i+seq.length<=hay.length;i++){let ok=true;for(let k=0;k<seq.length;k++){if(hay[i+k]!==seq[k]){ok=false;break;}}if(ok)return true;}return false;}
+function ehTranscricao(resp, textoBloco, enunciado){
+  const a=normaliza(resp), b=normaliza(textoBloco), q=normaliza(enunciado);
+  if(a.length<4) return false;
+  let seq=maiorSequenciaComum(a,b);
+  if(seq.length>=4 && contemSequencia(q,seq)){ return false; }
+  if(seq.length>=8) return true;
+  if(seq.length>=5 && (seq.length/a.length)>0.6) return true;
+  return false;
+}
+
+/* =================== RENDER =================== */
+function textoPlano(html){const d=document.createElement('div');d.innerHTML=html;return d.textContent||'';}
+function render(){
+  const cont=document.getElementById('blocos');cont.innerHTML='';
+  BLOCOS.forEach((b,i)=>{
+    const conferido=!!estado.conferido[i];
+    const liberado = i===0 || !!estado.conferido[i-1];
+    const div=document.createElement('div');
+    div.className='bloco'+(liberado?'':' travado');div.id='bloco'+i;
+    let qhtml='';
+    b.q.forEach((q,j)=>{
+      const val=(estado.resp[i]&&estado.resp[i][j])?estado.resp[i][j]:'';
+      const red=!!(estado.transcrita[i]&&estado.transcrita[i][j]);
+      let chkHtml='';
+      q.chk.forEach((c,k)=>{
+        const cv=(estado.chk[i]&&estado.chk[i][j]&&estado.chk[i][j][k])?estado.chk[i][j][k]:'';
+        chkHtml+=`<div class="cq">• ${c}
+          <label class="sim"><input type="radio" name="chk${i}_${j}_${k}" ${cv==='sim'?'checked':''} onchange="setChk(${i},${j},${k},'sim')"> Sim</label>
+          <label class="nao"><input type="radio" name="chk${i}_${j}_${k}" ${cv==='nao'?'checked':''} onchange="setChk(${i},${j},${k},'nao')"> Ainda não</label></div>`;
+      });
+      qhtml+=`<div class="qbox${red?' red':''}" id="qbox${i}_${j}">
+        <div class="pergunta">${j+1}. ${q.p}<span class="tipo ${q.tipo}">${q.tipo==='conc'?'conceito':'aplicação'}</span></div>
+        <textarea data-b="${i}" data-q="${j}" oninput="onResp(${i},${j},this.value)" ${conferido?'disabled':''} placeholder="Escreva com as suas palavras...">${val.replace(/</g,'&lt;')}</textarea>
+        <div class="avisocopia" id="aviso${i}_${j}">✍️ Boa parte da sua resposta está igual ao texto. Tente reescrever com as <b>suas palavras</b>, como se explicasse para um amigo, sem olhar o texto. Pode ficar mais curtinho — o que vale é ser SEU.</div>
+        <div class="marcavermelha" id="marca${i}_${j}">🔴 Esta resposta ficou muito parecida com o texto. Reescreva com as suas palavras quando puder — a marca some sozinha.</div>
+        <div class="modelo" id="mod${i}_${j}"><b>Resposta modelo:</b> ${q.m}</div>
+        <div class="checkbox-modelo" id="ckbox${i}_${j}"><div style="color:var(--muted);font-size:.85rem;margin-bottom:4px">A minha resposta disse que...</div>${chkHtml}</div>
+      </div>`;
+    });
+    div.innerHTML=`
+      ${liberado?'':'<div class="lock">🔒 pavilhão fechado</div>'}
+      <div class="pav">🎪 ${b.pav}</div>
+      <h2><span class="num">${i+1}</span>${b.t}</h2>
+      <div class="conteudo">
+        <div class="texto">${b.texto}</div>
+        ${qhtml}
+        <div class="acoes">
+          <button id="btn${i}" onclick="conferir(${i})" ${conferido?'disabled':''}>✅ Conferir respostas</button>
+          <span class="feito" id="feito${i}">Pavilhão conferido ✓</span>
+          <span class="status-bloco" id="status${i}"></span>
+        </div>
+      </div>`;
+    cont.appendChild(div);
+    if(conferido) mostrarConferido(i);
+  });
+  atualizarBotoes();atualizarProgresso();pintarInfo();checarFinal();
+}
+function onResp(i,j,v){
+  estado.resp[i]=estado.resp[i]||{};estado.resp[i][j]=v;
+  if(estado.transcrita[i]&&estado.transcrita[i][j]){
+    if(!ehTranscricao(v,textoPlano(BLOCOS[i].texto),BLOCOS[i].q[j].p)){
+      estado.transcrita[i][j]=false;
+      const qb=document.getElementById('qbox'+i+'_'+j);if(qb)qb.classList.remove('red');
+      const mk=document.getElementById('marca'+i+'_'+j);if(mk)mk.classList.remove('on');
+    }
+  }
+  atualizarBotoes();salvar();
+}
+function setChk(i,j,k,v){
+  estado.chk[i]=estado.chk[i]||{};estado.chk[i][j]=estado.chk[i][j]||{};estado.chk[i][j][k]=v;
+  salvar();atualizarStatus(i);checarFinal();
+}
+function todasPreenchidas(i){
+  const b=BLOCOS[i];
+  for(let j=0;j<b.q.length;j++){const v=(estado.resp[i]&&estado.resp[i][j])?estado.resp[i][j].trim():'';if(v.length<3)return false;}
+  return true;
+}
+function atualizarBotoes(){
+  BLOCOS.forEach((b,i)=>{const btn=document.getElementById('btn'+i);
+    if(btn&&!estado.conferido[i])btn.disabled=!todasPreenchidas(i);});
+}
+function conferir(i){
+  if(!todasPreenchidas(i))return;
+  let travou=false;
+  BLOCOS[i].q.forEach((q,j)=>{
+    const resp=(estado.resp[i]&&estado.resp[i][j])||'';
+    const aviso=document.getElementById('aviso'+i+'_'+j);
+    if(aviso)aviso.classList.remove('on');
+    const copia=ehTranscricao(resp,textoPlano(BLOCOS[i].texto),q.p);
+    estado.tentou[i]=estado.tentou[i]||{};
+    if(copia){
+      const jaTentou=!!(estado.tentou[i]&&estado.tentou[i][j]);
+      if(!jaTentou){
+        estado.tentou[i][j]=resp;
+        if(aviso)aviso.classList.add('on');
+        travou=true;
+      }else{
+        estado.transcrita[i]=estado.transcrita[i]||{};estado.transcrita[i][j]=true;
+      }
+    }
+  });
+  salvar();
+  if(travou){
+    modalInfo('<p>✍️ Quase lá! Uma ou mais respostas ficaram muito parecidas com o texto. Reescreva com as suas palavras e clique em <b>Conferir</b> de novo.</p>');
+    return;
+  }
+  estado.conferido[i]=true;salvar();render();
+  const prox=document.getElementById('bloco'+(i+1));
+  if(prox)prox.scrollIntoView({behavior:'smooth',block:'start'});
+  else document.getElementById('finalTrancado').scrollIntoView({behavior:'smooth'});
+}
+function mostrarConferido(i){
+  BLOCOS[i].q.forEach((q,j)=>{
+    const m=document.getElementById('mod'+i+'_'+j);if(m)m.style.display='block';
+    const c=document.getElementById('ckbox'+i+'_'+j);if(c)c.style.display='block';
+    if(estado.transcrita[i]&&estado.transcrita[i][j]){
+      const qb=document.getElementById('qbox'+i+'_'+j);if(qb)qb.classList.add('red');
+      const mk=document.getElementById('marca'+i+'_'+j);if(mk)mk.classList.add('on');
+    }
+  });
+  const f=document.getElementById('feito'+i);if(f)f.style.display='inline';
+  const btn=document.getElementById('btn'+i);if(btn){btn.disabled=true;btn.textContent='✅ Conferido';}
+  atualizarStatus(i);
+}
+function atualizarStatus(i){
+  if(!estado.conferido[i])return;
+  const st=document.getElementById('status'+i);if(!st)return;
+  let temNao=false, red=false;
+  BLOCOS[i].q.forEach((q,j)=>{
+    if(estado.transcrita[i]&&estado.transcrita[i][j])red=true;
+    q.chk.forEach((c,k)=>{const v=estado.chk[i]&&estado.chk[i][j]&&estado.chk[i][j][k];if(v==='nao')temNao=true;});
+  });
+  st.style.display='inline';
+  if(temNao||red){st.className='status-bloco rev';st.textContent='🔁 revisar este pavilhão';}
+  else{st.className='status-bloco ok';st.textContent='✅ tudo certo!';}
+}
+function atualizarProgresso(){
+  const n=Object.keys(estado.conferido).filter(k=>estado.conferido[k]).length;
+  document.getElementById('fill').style.width=(n/BLOCOS.length*100)+'%';
+  document.getElementById('progtxt').textContent='Pavilhão '+n+' de '+BLOCOS.length+' visitados';
+}
+function checarFinal(){
+  const todos=BLOCOS.every((b,i)=>estado.conferido[i]);
+  document.getElementById('finalTrancado').style.display=todos?'none':'block';
+  document.getElementById('parabens').style.display=todos?'block':'none';
+  document.getElementById('pegadinhasBox').innerHTML= todos?pegadinhasHTML():'';
+  document.getElementById('coberturaBox').innerHTML= todos?coberturaHTML():'';
+  document.getElementById('revisarBox').innerHTML= todos?revisarHTML():'';
+}
+function pegadinhasHTML(){
+  const li=PEGADINHAS.map(p=>'<li>'+p+'</li>').join('');
+  return `<div class="pegadinhas"><h2>⚠️ 10 pegadinhas que mais derrubam na prova</h2><ol>${li}</ol></div>`;
+}
+function coberturaHTML(){
+  const map={};BLOCOS.forEach((b,i)=>{map[b.topico]=map[b.topico]||[];map[b.topico].push(i+1);});
+  let linhas=Object.keys(map).map(t=>`<tr><td>${t}</td><td>Pavilhão(ões) ${map[t].join(', ')}</td></tr>`).join('');
+  return `<div class="cobertura"><h2>🗺️ Cobertura — o que cada tópico da prova tem aqui</h2>
+    <table><tr><th>Tópico da prova</th><th>Onde estudar</th></tr>${linhas}</table></div>`;
+}
+function revisarHTML(){
+  let itens=[];
+  BLOCOS.forEach((b,i)=>{
+    let red=false,nao=false;
+    b.q.forEach((q,j)=>{
+      if(estado.transcrita[i]&&estado.transcrita[i][j])red=true;
+      q.chk.forEach((c,k)=>{const v=estado.chk[i]&&estado.chk[i][j]&&estado.chk[i][j][k];if(v==='nao')nao=true;});
+    });
+    if(red||nao) itens.push('Pavilhão '+(i+1)+' — '+b.t+(red?' (resposta copiada 🔴)':'')+(nao?' (marcou "ainda não")':''));
+  });
+  if(!itens.length) return `<div class="revisar-final"><h2>🌟 Autoavaliação</h2><p style="color:var(--green2)">Você marcou tudo como certo e não copiou o texto. Ótimo! Pode seguir para o Quiz. 🎯</p></div>`;
+  return `<div class="revisar-final"><h2>📌 Para revisar antes da prova</h2><ul>${itens.map(x=>'<li>'+x+'</li>').join('')}</ul></div>`;
+}
+
+/* =================== EXPORTAR / IMPORTAR / ZERAR =================== */
+function exportar(){
+  const out={leitura:estado};
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='progresso-leitura-guiada-geografia9.json';a.click();
+}
+function importar(ev){
+  const f=ev.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const o=JSON.parse(r.result);
+    if(o.leitura){estado=o.leitura;}else{estado=o;}
+    salvar();render();modalInfo('<p>✅ Progresso importado!</p>');}
+    catch(e){modalInfo('<p>Arquivo inválido.</p>');}};
+  r.readAsText(f);
+}
+function zerar(){
+  modalConfirm('<p><b>Zerar tudo?</b></p><p>Isso apaga todas as respostas, para outra criança usar do zero.</p>',
+    ()=>{estado={resp:{},chk:{},conferido:{},transcrita:{},tentou:{},ts:null};lsDel(KEY);render();modalInfo('<p>🗑️ Tudo zerado!</p>');},'Sim, zerar','Cancelar');
+}
+
+/* =================== START =================== */
+carregar();render();
+</script>
+</body>
+</html>
